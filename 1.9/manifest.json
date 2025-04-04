@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "MidJourney 汉化插件 Pro+",
+  "description": "将 MidJourney 网站内容翻译成中文，自动监听并递归处理所有新内容。",
+  "version": "1.9",
+  "permissions": ["activeTab", "scripting"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.midjourney.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
