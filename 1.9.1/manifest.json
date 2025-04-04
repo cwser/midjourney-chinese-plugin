@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "MidJourney 汉化插件 Pro+",
+  "description": "将 MidJourney 网站内容翻译成中文，自动监听并递归处理所有新内容。",
+  "version": "1.9.1",
+  "permissions": [
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.midjourney.com/*"
+  ],
+  "action": {
+    "default_title": "MidJourney 翻译开关",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.midjourney.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
