@@ -34,30 +34,6 @@
 
 ---
 
-## 📦 最新版本下载
-
-👉 [前往 Releases 页面下载](https://github.com/cwser/midjourney-chinese-plugin/releases)
-
-当前版本：`v1.9`  
-文件名：`midjourney-plugin-proplus-v1.9-final-fixed.zip`
-
----
-
-## 🛠 自定义词典（高级用户）
-
-你可以手动修改 `content.js` 文件中的 `DICTIONARY` 常量，添加你想翻译的英文词汇和中文对应值。
-
----
-
-## 🧠 TODO / 计划支持
-
-- [ ] 支持自动翻译 Prompt 内容
-- [ ] 接入 GPT / DeepL 自动翻译接口（可选）
-- [ ] UI 风格可配置 / 主题切换
-- [ ] 用户词典本地配置功能
-
----
-
 ## 🙌 开发者
 
 由 G 哥友情打造 💻  
