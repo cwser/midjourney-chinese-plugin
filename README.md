@@ -2,52 +2,59 @@
   <img src="https://github.com/cwser/midjourney-chinese-plugin/blob/main/iocn/icon.svg?raw=true" width="100" alt="插件图标">
 </p>
 
-# MidJourney chinese Plugin 汉化增强版
+# MidJourney Plugin ProPlus 汉化增强版
 
-🌐 使用 Chrome 插件，将 MidJourney 网页全面中文化，支持新 UI 、未翻译选项补充、持续更新。
-
----
-
-## 功能特色
-
-- 汉化 MidJourney Web 界面大部分菜单和操作
-- 自动翻译页面文本，在页面加载后即时生效
-- 支持自定义补充词条，插件轻量无侧载
+🌐 使用 Chrome 插件，将 MidJourney 网页全面中文化，支持新 UI 、主题模式、动态内容持续更新，适配 MidJourney V6/V7 页面。
 
 ---
 
-## 安装指南
+## ✨ 功能特色
 
-1. 请在 [接口地址 Releases 页面](https://github.com/cwser/midjourney-chinese-plugin/releases) 下载最新版
-2. 解压 ZIP 文件
-3. 打开 Chrome，输入 `chrome://extensions/`
-4. 开启「开发者模式」
-5. 点击「加载已解压的扩展程序」，选择文件夹
+- 全面汉化 MidJourney 网页 UI（支持图标、菜单、按钮、提示等）
+- 自动替换页面元素，无需刷新或切换语言
+- 插件轻量级、开源、可扩展
 
 ---
 
-## 最新更新 (v1.9.8)
+## 📥 安装指南
 
-- 增加多个未翻译词条，包括 Add Search, Create Profile, Rating 等
-- 增加 PNG 图标，配合 manifest.json 正常显示
-- 优化部分文本翻译逻辑
-
----
-
-## 图片预览
-
-📅 [热门地方：使用前](./assets/before.png) | [使用后](./assets/after.png)
+1. 前往 [Releases 页面](https://github.com/cwser/midjourney-chinese-plugin/releases) 下载最新版本插件 zip
+2. 解压压缩包
+3. 打开浏览器访问：`chrome://extensions/`
+4. 开启右上角「开发者模式」
+5. 点击「加载已解压的扩展程序」，选择解压后的文件夹
 
 ---
 
-## 贡献或反馈
+## 🆕 更新日志
 
-- 如有未翻译内容，欢迎提 Issue 或 Pull Request
-- 如有新功能需求，欢迎联系我或 fork 自行实现
+### v1.9.9
+- ✅ 修复英文段落翻译中的语法报错（引号转义）
+- 🔤 新增以下界面词条翻译：
+  - `SubmitEdit` → 提交编辑
+  - `SubmitRetexture` → 提交重绘
+  - `Dark Mode` / `Light Mode` / `System` → 深色 / 浅色 / 跟随系统
+  - `Selected`, `Lobby`, `Create Room` 等
+  - 多段 MidJourney 文案引导内容："Teach Midjourney what you like..."
+- 🛠 修复 translation 逻辑，确保不会引发 JS 报错
+- 📦 保持 PNG 图标兼容性，维持 manifest.json 结构
 
 ---
 
-## License
+## 🖼 界面截图（可选）
+
+📌 [使用前截图](./assets/before.png) ｜ [使用后截图](./assets/after.png)
+
+---
+
+## 📬 反馈与贡献
+
+- 如发现遗漏或建议翻译改进，欢迎提交 Issue / PR
+- 插件支持持续维护，也欢迎 fork 后扩展更多功能
+
+---
+
+## 🪪 License
 
 MIT License
 
