@@ -1,46 +1,53 @@
-# 🌐 MidJourney 汉化插件 Pro+
+<p align="center">
+  <img src="https://github.com/cwser/midjourney-chinese-plugin/blob/main/iocn/icon.svg?raw=true" width="100" alt="插件图标">
+</p>
 
-一个专为 [MidJourney](https://www.midjourney.com) 打造的浏览器汉化插件，界面简洁、操作流畅，支持一键启用/关闭翻译，并自动翻译 SPA 页面中的动态内容。
+# MidJourney Plugin ProPlus 汉化增强版
 
----
-
-## ✨ 插件特色
-
-- 🈶 **支持 MidJourney 全站中文翻译**
-- ✅ **插件图标开关控制（Popup UI）**
-- 🔁 **支持动态内容翻译（MutationObserver）**
-- 💾 **记忆上次使用状态**
-- 📚 **内置丰富翻译词典，可自行扩展**
+🌐 使用 Chrome 插件，将 MidJourney 网页全面中文化，支持新 UI 、未翻译选项补充、持续更新。
 
 ---
 
-## 🧩 安装方式
+## 功能特色
 
-1. [点击下载最新版插件](https://github.com/cwser/midjourney-chinese-plugin/releases/latest)
-2. 解压下载的 `.zip` 文件
-3. 打开浏览器并访问：`chrome://extensions`
-4. 开启右上角「开发者模式」
-5. 点击「加载已解压的扩展程序」，选择插件所在的文件夹
-6. 安装完成后，浏览器右上角会出现插件图标 ✅
+- 汉化 MidJourney Web 界面大部分菜单和操作
+- 自动翻译页面文本，在页面加载后即时生效
+- 支持自定义补充词条，插件轻量无侧载
 
 ---
 
-## 🚀 使用说明
+## 安装指南
 
-1. 访问 [https://www.midjourney.com](https://www.midjourney.com)
-2. 点击浏览器右上角插件图标，打开控制面板
-3. 勾选「启用翻译」即可自动翻译页面文字
-4. 可随时点击图标关闭翻译，自动记忆状态
-
----
-
-## 🙌 开发者
-
-由 G 哥友情打造 💻  
-如需定制开发、扩展功能、UI 优化，欢迎联系！
+1. 请在 [接口地址 Releases 页面](https://github.com/cwser/midjourney-chinese-plugin/releases) 下载最新版
+2. 解压 ZIP 文件
+3. 打开 Chrome 或 Edge，输入 `chrome://extensions/`
+4. 开启「开发者模式」
+5. 点击「加载已解压的扩展程序」，选择文件夹
 
 ---
 
-## 🧾 许可证
+## 最新更新 (v1.9.8)
+
+- 增加多个未翻译词条，包括 Add Search, Create Profile, Rating 等
+- 增加 PNG 图标，配合 manifest.json 正常显示
+- 优化部分文本翻译逻辑
+
+---
+
+## 图片预览
+
+📅 [热门地方：使用前](./assets/before.png) | [使用后](./assets/after.png)
+
+---
+
+## 贡献或反馈
+
+- 如有未翻译内容，欢迎提 Issue 或 Pull Request
+- 如有新功能需求，欢迎联系我或 fork 自行实现
+
+---
+
+## License
 
 MIT License
+
