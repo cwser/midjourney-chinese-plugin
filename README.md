@@ -2,7 +2,7 @@
   <img src="https://github.com/cwser/midjourney-chinese-plugin/blob/main/iocn/icon.svg?raw=true" width="100" alt="插件图标">
 </p>
 
-# MidJourney Plugin ProPlus 汉化增强版
+# MidJourney chinese Plugin 汉化增强版
 
 🌐 使用 Chrome 插件，将 MidJourney 网页全面中文化，支持新 UI 、未翻译选项补充、持续更新。
 
@@ -20,7 +20,7 @@
 
 1. 请在 [接口地址 Releases 页面](https://github.com/cwser/midjourney-chinese-plugin/releases) 下载最新版
 2. 解压 ZIP 文件
-3. 打开 Chrome 或 Edge，输入 `chrome://extensions/`
+3. 打开 Chrome，输入 `chrome://extensions/`
 4. 开启「开发者模式」
 5. 点击「加载已解压的扩展程序」，选择文件夹
 
