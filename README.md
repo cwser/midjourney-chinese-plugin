@@ -2,19 +2,19 @@
   <img src="https://github.com/cwser/midjourney-chinese-plugin/blob/main/iocn/icon.svg?raw=true" width="100" alt="插件图标">
 </p>
 
-# MidJourney Plugin ProPlus 汉化增强版 v2.0.1
+# MidJourney Plugin ProPlus 汉化增强版 v2.0.2
 
-📌 一款为 [MidJourney 官网](https://www.midjourney.com/) 提供完整中文翻译的浏览器插件，适配新版 UI、V6/V7 模式、编辑器、Moodboard、风格评分等所有功能模块。
+📌 一款为 [MidJourney 官网](https://www.midjourney.com/) 提供完整中文翻译的浏览器插件，适配新版 UI、V6/V7 模式、编辑器、提示词构建、风格评分等所有功能模块。
 
 ---
 
 ## ✨ 插件亮点
 
-- 🌐 全面汉化 MidJourney 网页界面（支持 V6/V7、新 UI、Moodboard、图像提示词编辑器等）
-- ⚙️ 支持动态加载内容、弹出菜单、快捷按钮等内容的即时翻译
+- 🌐 全面汉化 MidJourney 网页界面，适配所有主流模块（包括编辑器、图像提示、搜索、评分等）
+- ⚙️ 支持动态加载区域（弹窗、下拉、浮动按钮等）的实时翻译
 - 🌒 自动适配深色 / 浅色主题
-- 📁 零依赖，离线运行，支持本地扩展
-- 🧹 特别处理残留英文词条：翻译失败时自动隐藏，界面更整洁
+- 📁 零依赖，纯本地运行，安全可靠
+- 🧹 智能处理无法识别的英文词条，自动隐藏残留英文，保持界面整洁
 
 ---
 
@@ -30,26 +30,23 @@
 
 ## 🆕 更新日志
 
-### v2.0.1
+### v2.0.2
 
-- 🈴 **新增词条翻译**（含编辑器常用词）：
-  - `Use as Image Prompt` → `用作图像提示词`
-  - `Edit Prompt` → `编辑提示词`
-  - `Search Image` → `搜索图像`
-  - `Like Image` → `喜欢图像`
-  - `Add saved search` → `添加已保存搜索`
-  - `Select all` → `全选`
-  - `Use the elements of an image` → `使用图像的元素`
-  - 及其他更新共 15+ 项
-- 🛠 修复 `content.js` 中逗号遗漏导致的语法错误（确保兼容所有 Chrome 版本）
-- 🧼 优化插入顺序与词典结构，保证插件长期可维护
+- 🈴 新增词条翻译：
+  - `Open in Editor` → `在编辑器中打开`
+  - `Back` → `返回`
+  - `Subject` → `主题`
+  - `Descriptors` → `描述词`
+  - `Known Artists` → `知名艺术家`
+- 🆙 插件版本号升级为 `2.0.2`
+- ✅ 持续兼容 MidJourney 编辑器与新版 UI 结构
 
 ---
 
 ## 💬 反馈建议
 
 欢迎在 GitHub 提交 Issue，补充未翻译词条或提出建议。  
-也欢迎 PR 共同维护中文生态 🧡
+也欢迎 PR 一起维护中文插件生态 🌱
 
 ---
 
