@@ -2,60 +2,49 @@
   <img src="https://github.com/cwser/midjourney-chinese-plugin/blob/main/iocn/icon.svg?raw=true" width="100" alt="插件图标">
 </p>
 
-# MidJourney Plugin ProPlus 汉化增强版 v1.9.9
+# MidJourney Plugin ProPlus 汉化增强版 v1.9.9-fixed18
 
-🌐 使用 Chrome 插件，将 MidJourney 网页全面中文化，支持新 UI 、主题模式、动态内容持续更新，适配 MidJourney V6/V7 页面。
-
----
-
-## ✨ 功能特色
-
-- 全面汉化 MidJourney 网页 UI（支持图标、菜单、按钮、提示等）
-- 动态替换页面元素，兼容新版网页结构（持续维护中）
-- 插件轻量级、开源、可扩展
+🎯 基于 MidJourney 官方网页定制的全面中文增强插件，适配 V6/V7、全新界面、Moodboard、风格投票等模块，汉化率 99%+！
 
 ---
 
-## 📥 安装指南
+## ✨ 插件亮点
 
-1. 前往 [Releases 页面](https://github.com/cwser/midjourney-chinese-plugin/releases) 下载最新版本插件 zip
-2. 解压压缩包
-3. 打开浏览器访问：`chrome://extensions/`
-4. 开启右上角「开发者模式」
-5. 点击「加载已解压的扩展程序」，选择解压后的文件夹
+- 🌐 MidJourney 官方网站全页面实时中文翻译（无需刷新）
+- 🧠 支持动态内容（异步加载/鼠标悬停菜单/对话气泡）
+- 🎨 自动适配黑暗模式/浅色模式
+- 🚫 无法识别词条将被隐藏，避免页面混乱
+- 🧩 零依赖，完全本地运行，支持开发者扩展
+
+---
+
+## 📦 安装方法
+
+1. 下载 [Releases 页面](https://github.com/cwser/midjourney-chinese-plugin/releases) 中的 zip 包
+2. 解压到本地文件夹
+3. 打开浏览器地址：`chrome://extensions/`
+4. 启用「开发者模式」
+5. 点击「加载已解压的扩展程序」，选择插件目录
 
 ---
 
 ## 🆕 更新日志
 
-### v1.9.9-fixed12
-- ✅ 全面补全 MidJourney 新 UI 各项功能词条，汉化覆盖率近乎 100%
-- 🔤 新增翻译词条：
-  - Profile 相关：`Use Profile`, `Profile`, `Use in prompt`, `Rename`, `View Creations`, `Delete`
-  - 操作按钮类：`Remix`, `Pan`, `Zoom`, `More actions`
-  - 创作操作面板：`Creation Actions`, `Vary`, `Upscale`, `Subtle`, `Strong`, `Creative`, `Editor`
-  - 动作按钮：`Vary Subtle`, `Vary Strong`, `Add images`, `Continue ranking`, `use text`, `Imagine`
-  - Moodboard 页面：`Moodboard`, `Set as Default`, `Upload Images`, `Add from Link`, `Add from Gallery`, `Add images with the buttons above...`
-  - 提示与引导文字：`Select the image you like better...`, `Press 1 or 2...`, `to unlock profile`
-- 🛠 修复 translation 逻辑，确保不会引发 JS 报错（引号转义）
-- 📦 保持 PNG 图标兼容性，维持 manifest.json 结构
+### v1.9.9-fixed18
+
+- 🚫 移除无法汉化的残留词条（BACK, SKIP, rankings, Press 1 or 2 等）
+- 🧠 逻辑增强：无法匹配的关键词将被自动隐藏，保持界面整洁
+- 🔍 完善模糊翻译匹配逻辑（支持结构嵌套/异步插入）
+- 🧹 全面清扫 V7 配置投票、编辑器、图像上传等英文残留
 
 ---
 
-## 🖼 界面截图（可选）
+## 📬 反馈建议
 
-📌 [使用前截图](./assets/before.png) ｜ [使用后截图](./assets/after.png)
-
----
-
-## 📬 反馈与贡献
-
-- 如发现遗漏或建议翻译改进，欢迎提交 Issue / PR
-- 插件支持持续维护，也欢迎 fork 后扩展更多功能
+如有界面没翻译完全或识别错误，欢迎通过 GitHub Issue 反馈，插件将持续迭代更新 ❤️
 
 ---
 
 ## 🪪 License
 
 MIT License
-
