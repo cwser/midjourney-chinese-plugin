@@ -4,7 +4,7 @@
 
 # MidJourney Plugin ProPlus 汉化增强版 v1.9.9-fixed19
 
-📌 面向 MidJourney 网页用户的超强中文汉化增强插件，适配新版 UI 和全部功能区，持续更新。
+📌 一款为 [MidJourney 官网](https://www.midjourney.com/) 提供完整中文翻译的浏览器插件，适配新版 UI、V6/V7 模式、Moodboard、风格评分等所有功能模块。
 
 ---
 
