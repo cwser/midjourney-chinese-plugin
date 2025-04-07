@@ -47,8 +47,8 @@
 1. 进入 [Releases 页面](https://github.com/cwser/midjourney-chinese-plugin/releases) 下载最新版插件 `MidJourney.Pro+.app.zip`  
 2. 解压插件包  
 3. 打开插件，点击 `Quit and Open Safari Extensions Preferences..`
-4. 点击右上角 **高级**，勾选底部 **在菜单栏中显示“开发”菜单**  
-5. 点击菜单栏 **开发**，勾选 **允许未签名的扩展**  
+4. 点击右上角「高级」，勾选底部「在菜单栏中显示“开发”菜单」  
+5. 点击菜单栏「开发」，勾选「允许未签名的扩展」  
 6. 在 **Safari → 设置 → 扩展** 中找到 **MidJourney 汉化插件 Pro+** 扩展
 
 ---
