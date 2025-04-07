@@ -38,18 +38,6 @@
 4. 开启左侧栏「开发者模式」
 5. 点击「加载已解压的扩展程序」，选择解压后的插件文件夹
 
-### 📌 步骤 1：下载插件
-
-1. 进入插件 [Releases 页面](https://github.com/cwser/midjourney-chinese-plugin/releases) 下载最新版插件 `.zip` 文件。
-2. 解压插件包到你方便访问的文件夹。
-
----
-
-### 📌 步骤 2：在 Edge 浏览器启用开发者模式
-
-1. 打开 Microsoft Edge 浏览器。
-2. 在浏览器地址栏输入 `edge://extensions/`，按下 `Enter` 键，进入扩展程序管理页面。
-
 ---
 
 ## 🆕 更新日志
