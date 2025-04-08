@@ -42,8 +42,6 @@
 
 ## 🖥 **在 Mac Safari 浏览器中安装**
 
-# MidJourney 汉化插件使用教程
-
 1. 进入 [Releases 页面](https://github.com/cwser/midjourney-chinese-plugin/releases) 下载最新版插件 `MidJourney.Pro+.app.zip`  
 2. 解压插件包  
 3. 打开插件，点击 `Quit and Open Safari Extensions Preferences..`
