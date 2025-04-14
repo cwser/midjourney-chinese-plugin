@@ -38,7 +38,7 @@
 
 ### 🖥 **在 Safari 浏览器（macOS）中安装**
 
-1. 下载并解压 `MidjourneyCN.Pro.app.zip`
+1. 下载并解压 `MidjourneyCN for Mac`
 2. 打开 App → 点击 `Quit and Open Safari Extension Preferences`
 3. Safari → 设置 → 扩展 → 启用插件  
 4. 如果无法启用：
