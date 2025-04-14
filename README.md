@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/cwser/midjourney-cn-pro/blob/main/icon/icon.svg?raw=true" width="100" alt="插件图标">
+  <img src="[https://github.com/cwser/midjourney-cn-pro/blob/main/icon/icon.svg?raw=true](https://github.com/cwser/midjourney-chinese-plugin/blob/main/iocn/icon.svg)" width="100" alt="插件图标">
 </p>
 
 # MidjourneyCN Pro 中文增强插件 v3.0.0
