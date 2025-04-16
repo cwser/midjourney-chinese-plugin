@@ -28,7 +28,7 @@
 
 ### 🚀 Chrome 浏览器安装步骤
 
-1. 访问 [Releases 页面](https://github.com/cwser/midjourney-cn-pro/releases) 下载最新插件 `.zip` 文件
+1. 访问 [Releases 页面](https://github.com/cwser/midjourney-chinese-plugin/releases) 下载最新插件 `.zip` 文件
 2. 解压压缩包
 3. 打开 `chrome://extensions/`
 4. 开启右上角「开发者模式」
