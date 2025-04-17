@@ -85,94 +85,182 @@
     a:hover {
       text-decoration: underline;
     }
+    .sponsor-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+    .sponsor-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(8px);
+      width: 180px;
+    }
+    .sponsor-card img {
+      border-radius: 12px;
+      width: 100%;
+      height: auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      cursor: zoom-in;
+    }
+    .sponsor-card p {
+      margin-top: 0.5rem;
+      font-weight: bold;
+      color: #fff;
+    }
+    .feature-box img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 0 auto;
+  display: block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: zoom-in;
+  z-index: 1;
+}
+    .image-lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.75);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      cursor: zoom-out;
+    }
+    .image-lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      animation: zoomIn 0.3s ease;
+    }
+    @keyframes zoomIn {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    @keyframes zoomOut {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>MidJourneyCN 中文汉化插件</h1>
-    <p>一款专为 MidJourney 用户打造的中文优化工具，解锁更便捷的 AI 绘图体验。</p>
-  </header>
+  <h1>MidJourneyCN 中文汉化插件</h1>
+  <p>一款专为 MidJourney 用户打造的中文优化工具，解锁更便捷的 AI 绘图体验。</p>
+</header>
 
-  <section class="section">
-    <h2>插件亮点 ✨</h2>
-    <div class="features">
-      <div class="feature-box">
-        <h3>📌 <span>全面汉化</span></h3>
-        <p>支持 MidJourney V6/V7 的核心功能模块，含评分、编辑器、变体等。</p>
-      </div>
-      <div class="feature-box">
-        <h3>📋 <span>实用功能</span></h3>
-        <p>支持界面翻译、关键按钮优化、使用流程汉化，提升使用体验。</p>
-      </div>
-      <div class="feature-box">
-        <h3>🧩 <span>适配平台</span></h3>
-        <p>支持 Chrome、Edge 和 Safari（Mac）等主流浏览器，安装灵活，跨平台使用。</p>
-      </div>
-      <div class="feature-box">
-        <h3>🔧 <span>轻量高效</span> / <span>完全免费</span></h3>
-        <p>插件轻量安装，开箱即用。</p>
-      </div>
+<section class="section">
+  <h2>插件亮点 ✨</h2>
+  <div class="features">
+    <div class="feature-box">
+      <h3>📌 <span>全面汉化</span></h3>
+      <p>支持 MidJourney V6/V7 的核心功能模块，含评分、编辑器、变体等。</p>
     </div>
-  </section>
-
-  <section class="section">
-    <h2>安装方式 📦</h2>
-    <div class="features">
-      <div class="feature-box">
-        <h3>🧭 <span>Chrome 浏览器安装步骤</span></h3>
-        <ol>
-          <li>访问 <a href="https://github.com/cwser/midjourney-chinese-plugin/releases" target="_blank">Releases 页面</a> 下载最新插件 <code>.zip</code> 文件</li>
-          <li>解压压缩包</li>
-          <li>打开 <code>chrome://extensions/</code></li>
-          <li>开启右上角「开发者模式」</li>
-          <li>点击「加载已解压的扩展程序」，选择解压后的插件文件夹</li>
-        </ol>
-      </div>
-      <div class="feature-box">
-        <h3>🧭 <span>Edge 浏览器安装步骤</span></h3>
-        <ol>
-          <li>访问 <a href="https://github.com/cwser/midjourney-chinese-plugin/releases" target="_blank">Releases 页面</a> 下载最新插件 <code>.zip</code> 文件</li>
-          <li>解压压缩包</li>
-          <li>打开 <code>edge://extensions/</code></li>
-          <li>开启右上角「开发者模式」</li>
-          <li>点击「加载已解压的扩展程序」，选择解压后的插件文件夹</li>
-        </ol>
-      </div>
-      <div class="feature-box">
-        <h3>🧭 <span>Safari 浏览器（Mac）安装方法</span></h3>
-        <ol>
-          <li>访问 <a href="https://github.com/cwser/midjourney-chinese-plugin/releases" target="_blank">Releases 页面</a> 下载最新 <code>MidjourneyCN for Mac</code> 安装包</li>
-          <li>打开 App 并点击“打开 Safari 插件设置”</li>
-          <li>Safari → 设置 → 扩展 → 启用插件</li>
-          <li>如无法启用：
-            <ul>
-              <li>Safari → 设置 → 高级 → 勾选“在菜单栏显示‘开发’”</li>
-              <li>菜单栏 → 开发 → 勾选“允许未经签名的扩展”</li>
-            </ul>
-          </li>
-        </ol>
-      </div>
+    <div class="feature-box">
+      <h3>📋 <span>实用功能</span></h3>
+      <p>支持界面翻译、关键按钮优化、使用流程汉化，提升使用体验。</p>
     </div>
-  </section>
+    <div class="feature-box">
+      <h3>🧩 <span>适配平台</span></h3>
+      <p>支持 Chrome、Edge 和 Safari（Mac）等主流浏览器，安装灵活，跨平台使用。</p>
+    </div>
+    <div class="feature-box">
+      <h3>🔧 <span>轻量高效</span> / <span>完全免费</span></h3>
+      <p>插件轻量安装，开箱即用。</p>
+    </div>
+  </div>
+</section>
 
-  <section class="section">
-    <h2>插件截图 🔍</h2>
-    <p>即将上线...</p>
-  </section>
+<section class="section">
+  <h2>安装方式 📦</h2>
+  <div class="features">
+    <div class="feature-box">
+      <h3>🧭 <span>Chrome 浏览器安装步骤</span></h3>
+      <ol>
+        <li>访问 <a href="https://github.com/cwser/midjourney-chinese-plugin/releases" target="_blank">Releases 页面</a> 下载最新插件 <code>.zip</code> 文件</li>
+        <li>解压压缩包</li>
+        <li>打开 <code>chrome://extensions/</code></li>
+        <li>开启右上角「开发者模式」</li>
+        <li>点击「加载已解压的扩展程序」，选择解压后的插件文件夹</li>
+      </ol>
+    </div>
+    <div class="feature-box">
+      <h3>🧭 <span>Edge 浏览器安装步骤</span></h3>
+      <ol>
+        <li>访问 <a href="https://github.com/cwser/midjourney-chinese-plugin/releases" target="_blank">Releases 页面</a> 下载最新插件 <code>.zip</code> 文件</li>
+        <li>解压压缩包</li>
+        <li>打开 <code>edge://extensions/</code></li>
+        <li>开启右上角「开发者模式」</li>
+        <li>点击「加载已解压的扩展程序」，选择解压后的插件文件夹</li>
+      </ol>
+    </div>
+    <div class="feature-box">
+      <h3>🧭 <span>Safari 浏览器（Mac）安装方法</span></h3>
+      <ol>
+        <li>访问 <a href="https://github.com/cwser/midjourney-chinese-plugin/releases" target="_blank">Releases 页面</a> 下载最新 <code>MidjourneyCN for Mac</code> 安装包</li>
+        <li>打开 App 并点击“打开 Safari 插件设置”</li>
+        <li>Safari → 设置 → 扩展 → 启用插件</li>
+        <li>如无法启用：
+          <ul>
+            <li>Safari → 设置 → 高级 → 勾选“在菜单栏显示‘开发’”</li>
+            <li>菜单栏 → 开发 → 勾选“允许未经签名的扩展”</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
 
-  <section class="section">
+<section class="section">
+  <h2>插件截图 🔍</h2>
+  <div class="features">
+    <div class="feature-box" style="text-align: center;">
+      <img src="https://github.com/cwser/midjourney-chinese-plugin/blob/main/截图/截屏2025-04-06%2000.59.09.png?raw=true" alt="插件截图1">
+    </div>
+    <div class="feature-box" style="text-align: center;">
+      <img src="https://github.com/cwser/midjourney-chinese-plugin/blob/main/截图/截屏2025-04-17%2023.04.59.png?raw=true" alt="插件截图2">
+    </div>
+    <div class="feature-box" style="text-align: center;">
+      <img src="https://github.com/cwser/midjourney-chinese-plugin/blob/main/截图/截屏2025-04-17%2023.05.22.png?raw=true" alt="插件截图3">
+    </div>
+  </div>
+</section>
+
+<section class="section">
   <h2>赞助我们 ❤️</h2>
   <p style="font-size: 1.1rem; color: #ddd; line-height: 1.8;">
     你的支持，是我们持续开发和优化插件的最大动力。如果你觉得这个插件对你有帮助，欢迎通过以下方式打赏支持我们 🫶
   </p>
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem; margin-top: 2rem;">
-    <div style="text-align: center;">
-      <img src="https://github.com/cwser/midjourney-chinese-plugin/blob/main/iocn/支付宝二维码.JPG?raw=true" alt="支付宝赞助" width="180" style="border-radius: 12px; box-shadow: 0 0 8px rgba(0,0,0,0.3);">
-      <p style="margin-top: 0.5rem; font-weight: bold;">支付宝</p>
+  <div class="sponsor-wrapper">
+    <div class="sponsor-card">
+      <img src="https://github.com/cwser/midjourney-chinese-plugin/blob/main/iocn/支付宝二维码.JPG?raw=true" alt="支付宝赞助">
+      <p>支付宝</p>
     </div>
-    <div style="text-align: center;">
-      <img src="https://github.com/cwser/midjourney-chinese-plugin/blob/main/iocn/微信二维码.JPG?raw=true" alt="微信赞助" width="180" style="border-radius: 12px; box-shadow: 0 0 8px rgba(0,0,0,0.3);">
-      <p style="margin-top: 0.5rem; font-weight: bold;">微信</p>
+    <div class="sponsor-card">
+      <img src="https://github.com/cwser/midjourney-chinese-plugin/blob/main/iocn/微信二维码.JPG?raw=true" alt="微信赞助">
+      <p>微信</p>
     </div>
   </div>
   <div style="margin-top: 2rem; font-size: 1rem;">
@@ -183,13 +271,47 @@
   </div>
 </section>
 
-  <section class="section">
-    <h2>FAQ & 联系方式 📮</h2>
-    <p>如遇问题可通过 GitHub issue 留言，或发送邮件至 <a href="mailto:1352674939@qq.com">1352674939@qq.com</a></p>
-  </section>
+<section class="section">
+  <h2>FAQ & 联系方式 📮</h2>
+  <p>如遇问题可通过 GitHub issue 留言，或发送邮件至 <a href="mailto:1352674939@qq.com">1352674939@qq.com</a></p>
+</section>
 
-  <footer>
-    &copy; 2025 MidJourney 中文插件 | 由 cwser & G哥 联合开发
-  </footer>
+<footer>
+  &copy; 2025 MidJourney 中文插件 | 由 cwser & G哥 联合开发
+</footer>
+
+  <script>
+    function createLightbox(src, alt) {
+      const lightbox = document.createElement('div');
+      lightbox.classList.add('image-lightbox');
+
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = alt;
+
+      lightbox.appendChild(img);
+      document.body.appendChild(lightbox);
+
+      function removeLightbox() {
+        img.style.animation = 'zoomOut 0.3s ease';
+        lightbox.style.pointerEvents = 'none';
+        setTimeout(() => lightbox.remove(), 280);
+      }
+
+      lightbox.addEventListener('click', removeLightbox);
+      document.addEventListener('keydown', function escHandler(e) {
+        if (e.key === 'Escape') {
+          removeLightbox();
+          document.removeEventListener('keydown', escHandler);
+        }
+      });
+    }
+
+    document.querySelectorAll('.feature-box img, .sponsor-card img').forEach(img => {
+      img.addEventListener('click', () => {
+        createLightbox(img.src, img.alt);
+      });
+    });
+  </script>
 </body>
 </html>
