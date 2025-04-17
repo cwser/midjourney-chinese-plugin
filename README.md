@@ -36,12 +36,14 @@
 
 ### 🚀 Edge 浏览器安装步骤
 
-1. 同样解压 `.zip` 文件
-2. 访问 `edge://extensions/`
-3. 开启「开发者模式」
-4. 点击「加载已解压的扩展程序」，选择解压后的插件文件夹
+1. 访问 [Releases 页面](https://github.com/cwser/midjourney-chinese-plugin/releases) 下载最新插件 `.zip` 文件
+2. 解压压缩包
+3. 访问 `edge://extensions/`
+4. 开启右上角「开发者模式」
+5. 点击「加载已解压的扩展程序」，选择解压后的插件文件夹
 
 ### 🚀 Safari 浏览器（Mac）安装方法
+
 
 1. 下载 `MidjourneyCN for Mac` 安装包
 2. 打开 App 并点击“打开 Safari 插件设置”
