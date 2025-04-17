@@ -6,33 +6,83 @@
     <title>MidJourney 中文插件</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            color: white;
         }
-        h1 {
-            color: #333;
-        }
+
         .container {
             max-width: 900px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 20px;
+            color: #ffcc00;
+        }
+
+        p, ul {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
         a {
-            color: #007bff;
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #2575fc;
+            color: white;
             text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #6a11cb;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 1rem;
+            color: #aaa;
+        }
+
+        .highlight {
+            color: #ffcc00;
         }
     </style>
 </head>
 <body>
+
     <div class="container">
         <h1>MidJourney 中文插件</h1>
-        <p>欢迎使用 MidJourney 中文插件，它能够帮助你将 MidJourney 用户界面完全翻译成中文，提升使用体验。</p>
-        
+        <p>欢迎使用 MidJourney 中文插件！这款插件将帮助你将 MidJourney 用户界面完全翻译成中文，让你更轻松地使用。</p>
+
         <h2>插件功能：</h2>
         <ul>
             <li>全中文界面翻译</li>
@@ -41,11 +91,16 @@
         </ul>
 
         <h2>安装步骤：</h2>
-        <p>你可以通过以下链接下载并安装插件：</p>
+        <p>点击下面的按钮下载并安装插件：</p>
         <a href="https://github.com/cwser/midjourney-chinese-plugin" target="_blank">点击这里下载插件</a>
 
         <h2>更多信息：</h2>
         <p>插件的更多更新和安装教程请查看 GitHub 仓库。</p>
     </div>
+
+    <footer>
+        <p>感谢使用 MidJourney 中文插件！&nbsp;|&nbsp;由 <span class="highlight">cwser</span> 开发</p>
+    </footer>
+
 </body>
 </html>
