@@ -1,106 +1,172 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MidJourney 中文插件</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            margin: 0;
-            padding: 0;
-            color: white;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 50px auto;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-top: 20px;
-            color: #ffcc00;
-        }
-
-        p, ul {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        a {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: #2575fc;
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        a:hover {
-            background-color: #6a11cb;
-        }
-
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        li {
-            margin-bottom: 10px;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 1rem;
-            color: #aaa;
-        }
-
-        .highlight {
-            color: #ffcc00;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MidJourneyCN 中文汉化插件</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1f1f2f, #3c3c5a);
+      margin: 0;
+      padding: 0;
+      color: #fff;
+    }
+    header {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      font-size: 1.25rem;
+      color: #ccc;
+    }
+    .section {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-box {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    .feature-box h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .feature-box span {
+      color: #fff;
+      font-weight: bold;
+    }
+    .install {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 1rem;
+    }
+    .install ol {
+      line-height: 1.8;
+    }
+    .install h3 {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      color: #ffcc66;
+    }
+    .install code {
+      background: #333;
+      padding: 2px 6px;
+      border-radius: 5px;
+      font-size: 0.95rem;
+      color: #9cf;
+    }
+    footer {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #aaa;
+}
+    a {
+      color: #9cf;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>MidJourneyCN 中文汉化插件</h1>
+    <p>一款专为 MidJourney 用户打造的中文优化工具，解锁更便捷的 AI 绘图体验。</p>
+  </header>
 
-    <div class="container">
-        <h1>MidJourney 中文插件</h1>
-        <p>欢迎使用 MidJourney 中文插件！这款插件将帮助你将 MidJourney 用户界面完全翻译成中文，让你更轻松地使用。</p>
-
-        <h2>插件功能：</h2>
-        <ul>
-            <li>全中文界面翻译</li>
-            <li>支持变体生成、评分、搜索、图像信息等功能</li>
-            <li>动态元素翻译（弹窗、下拉菜单等）</li>
-        </ul>
-
-        <h2>安装步骤：</h2>
-        <p>点击下面的按钮下载并安装插件：</p>
-        <a href="https://github.com/cwser/midjourney-chinese-plugin" target="_blank">点击这里下载插件</a>
-
-        <h2>更多信息：</h2>
-        <p>插件的更多更新和安装教程请查看 GitHub 仓库。</p>
+  <section class="section">
+    <h2>插件亮点 ✨</h2>
+    <div class="features">
+      <div class="feature-box">
+        <h3>📌 <span>全面汉化</span></h3>
+        <p>支持 MidJourney V6/V7 的核心功能模块，含评分、编辑器、变体等。</p>
+      </div>
+      <div class="feature-box">
+        <h3>📋 <span>实用功能</span></h3>
+        <p>支持界面翻译、关键按钮优化、使用流程汉化，提升使用体验。</p>
+      </div>
+      <div class="feature-box">
+        <h3>🧩 <span>适配平台</span></h3>
+<p>支持 Chrome、Edge 和 Safari（Mac）等主流浏览器，安装灵活，跨平台使用。</p>
+      </div>
+      <div class="feature-box">
+        <h3>🔧 <span>轻量高效</span> / <span>完全免费</span></h3>
+        <p>插件轻量安装，开箱即用。</p>
+      </div>
     </div>
+  </section>
 
-    <footer>
-        <p>感谢使用 MidJourney 中文插件！&nbsp;|&nbsp;由 <span class="highlight">cwser</span> 开发</p>
-    </footer>
+  <section class="section">
+  <h2>安装方式 📦</h2>
+  <div class="features">
+    <div class="feature-box">
+      <h3>🧭 <span>Chrome 浏览器安装步骤</span></h3>
+      <ol>
+        <li>访问 <a href="https://github.com/cwser/midjourney-chinese-plugin/releases" target="_blank">Releases 页面</a> 下载最新插件 <code>.zip</code> 文件</li>
+        <li>解压压缩包</li>
+        <li>打开 <code>chrome://extensions/</code></li>
+        <li>开启右上角「开发者模式」</li>
+        <li>点击「加载已解压的扩展程序」，选择解压后的插件文件夹</li>
+      </ol>
+    </div>
+    <div class="feature-box">
+      <h3>🧭 <span>Edge 浏览器安装步骤</span></h3>
+      <ol>
+        <li>访问 <a href="https://github.com/cwser/midjourney-chinese-plugin/releases" target="_blank">Releases 页面</a> 下载最新插件 <code>.zip</code> 文件</li>
+        <li>解压压缩包</li>
+        <li>打开 <code>edge://extensions/</code></li>
+        <li>开启右上角「开发者模式」</li>
+        <li>点击「加载已解压的扩展程序」，选择解压后的插件文件夹</li>
+      </ol>
+    </div>
+    <div class="feature-box">
+      <h3>🧭 <span>Safari 浏览器（Mac）安装方法</span></h3>
+      <ol>
+        <li>下载 <code>MidjourneyCN for Mac</code> 安装包</li>
+        <li>打开 App 并点击“打开 Safari 插件设置”</li>
+        <li>Safari → 设置 → 扩展 → 启用插件</li>
+        <li>如无法启用：
+          <ul>
+            <li>Safari → 设置 → 高级 → 勾选“在菜单栏显示‘开发’”</li>
+            <li>菜单栏 → 开发 → 勾选“允许未经签名的扩展”</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
 
+  <section class="section">
+    <h2>插件截图 🔍</h2>
+    <p>即将上线...</p>
+  </section>
+
+  <section class="section">
+    <h2>FAQ & 联系方式 📮</h2>
+    <p>如遇问题可通过 GitHub issue 留言，或发送邮件至 <a href="mailto:yourmail@example.com">yourmail@example.com</a></p>
+  </section>
+
+  <footer>
+    &copy; 2025 MidJourney 中文插件 | 由 cwser & G哥 联合开发
+  </footer>
 </body>
 </html>
