@@ -2,7 +2,7 @@
   <img src="https://github.com/cwser/midjourney-chinese-plugin/blob/main/iocn/icon.svg?raw=true" width="100" alt="插件图标">
 </p>
 
-# 🧩 MidjourneyCN Pro 中文增强插件 v3.0.0
+# 🧩 MidjourneyCN Pro 中文增强插件 v4.0.0
 
 **一款适用于 MidJourney 的浏览器中文插件，支持 MidJourney 全站界面汉化、提示词翻译、图像编辑器翻译、风格评分翻译等功能。适配最新 V6 / V7 模式，是目前最完整的 MidJourney 中文解决方案。**
 
@@ -51,18 +51,6 @@
 4. 如无法启用：
    - Safari → 设置 → 高级 → 勾选“在菜单栏显示‘开发’”
    - 菜单栏 → 开发 → 勾选“允许未签名的扩展”
-
----
-
-## 🆕 最新更新日志
-
-### ✅ v3.0.0 更新内容
-
-- 🔠 新增超 80 条翻译词条，覆盖图像编辑、评分、模型参数、提示信息等
-- 📷 完整支持：放大、变体、重绘、扩展画布等编辑功能翻译
-- 🧩 翻译新增：Raw、Stylize、Variety、风格化、多样性等核心模型参数
-- ⚙️ 动态界面翻译优化：弹窗、语音提示、更多按钮、菜单栏等
-- 🔄 持续适配 MidJourney 网站架构更新
 
 ---
 
