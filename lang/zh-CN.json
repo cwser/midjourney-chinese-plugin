@@ -1,6 +1,4 @@
 {
-  "Inside every prompt are \"unspoken\" details. Midjourney will try to fill these in a way that makes the image most compelling for the entire community.": "每个提示词中都包含一些“未说出口”的细节。Midjourney 会尝试以最吸引整个社区的方式填补这些信息。",
-  "But your tastes are unique! Do you like cute animals or fearless fantasy creatures? Buildings old and rugged, or sleek and modern? Profiles help Midjourney \"get to know you\" and shape images toward what you love.": "但你的品味是独一无二的！你喜欢可爱的动物，还是无畏的奇幻生物？是古老粗犷的建筑，还是现代流畅的风格？配置文件可以帮助 Midjourney 了解你，从而生成更符合你喜好的图像。",
   "Character Reference": "角色参考",
   "Use a character's likeness": "使用角色外貌",
   "Menu": "菜单",
@@ -22,6 +20,8 @@
   "Teach Midjourney about what you find beautiful.": "告诉 Midjourney 你认为美丽的事物",
   "Unlock Personalization": "解锁个性化",
   "Open Image in New Tab": "在新标签页中打开图片",
+  "Inside every prompt are \"unspoken\" details. Midjourney will try to fill these in a way that makes the image most compelling for the entire community.": "每个提示词中都包含一些“未说出口”的细节。Midjourney 会尝试以最吸引整个社区的方式填补这些信息。",
+  "But your tastes are unique! Do you like cute animals or fearless fantasy creatures? Buildings old and rugged, or sleek and modern? Profiles help Midjourney \"get to know you\" and shape images toward what you love.": "但你的品味是独一无二的！你喜欢可爱的动物，还是无畏的奇幻生物？是古老粗犷的建筑，还是现代流畅的风格？配置文件可以帮助 Midjourney 了解你，从而生成更符合你喜好的图像。",
   "Create Personalization Profiles to teach Midjourney what you like. Add images to Moodboards to give Midjourney visual inspiration.": "创建个性化个人资料，让 Midjourney 了解你的喜好。将图像添加到情绪板，为 Midjourney 提供视觉灵感。","Use Image": "使用图片",
   "Reference Style": "参考样式",
   "Describe Image": "描述图片",
