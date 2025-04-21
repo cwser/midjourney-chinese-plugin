@@ -2,7 +2,7 @@
 // @name         MidJourneyCN
 // @namespace    http://tampermonkey.net/
 // @version      1.0.0
-// @description  将 MidJourney 网站英文界面翻译为中文，稳定版
+// @description  将 MidJourney 网站英文界面翻译为中文，稳定增强版（支持简繁切换、缓存、自动更新、动态监听增强）
 // @author       G哥
 // @match        https://www.midjourney.com/*
 // @grant        none
@@ -33,9 +33,9 @@
       return;
     }
 
-    const resHans = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/refs/heads/main/lang/zh-CN.json');
+    const resHans = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/lang/zh-CN.json');
     dictHans = await resHans.json();
-    const resHant = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/refs/heads/main/lang/zh-TW.json');
+    const resHant = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/lang/zh-TW.json');
     dictHant = await resHant.json();
 
     localStorage.setItem(cacheKey, JSON.stringify({
@@ -51,16 +51,15 @@
 
   function translateText(text) {
     const dict = getDict();
-    return dict[text.trim()] || text;
+    const cleaned = text.trim();
+    return dict[cleaned] || text;
   }
 
   function processNode(node) {
-    if (!config.enabled) return;
+    if (!config.enabled || !node || !document.body.contains(node)) return;
     if (node.nodeType === 3) {
       const translated = translateText(node.textContent);
-      if (translated && translated !== node.textContent) {
-        node.textContent = translated;
-      }
+      if (translated && translated !== node.textContent) node.textContent = translated;
     } else if (node.nodeType === 1 && !node.dataset.translated) {
       if (node.childNodes.length === 1 && node.firstChild.nodeType === 3) {
         const translated = translateText(node.textContent);
@@ -81,13 +80,16 @@
   const observer = new MutationObserver(mutations => {
     mutations.forEach(m => {
       m.addedNodes.forEach(n => processNode(n));
+      if (m.type === 'characterData') processNode(m.target);
     });
   });
 
   function initObserver() {
     observer.observe(document.body, {
       childList: true,
-      subtree: true
+      subtree: true,
+      characterData: true,
+      attributes: true
     });
   }
 
@@ -96,44 +98,25 @@
     btn.id = 'mj-trans-btn';
     btn.innerText = '🌐';
     btn.style.cssText = `
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 9999;
-      width: 40px;
-      height: 40px;
-      background: #000000cc;
-      color: #fff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      opacity: 0.6;
-    `;
+      position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+      width: 40px; height: 40px;
+      background: #000c; color: #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; opacity: 0.6; backdrop-filter: blur(4px);`
 
     const panel = document.createElement('div');
     panel.id = 'mj-trans-panel';
     panel.style.cssText = `
-      position: fixed;
-      bottom: 20px;
-      right: 70px;
-      z-index: 9998;
-      background: #ffffffee;
-      padding: 10px;
-      border-radius: 8px;
+      position: fixed; bottom: 20px; right: 70px; z-index: 9998;
+      background: #fffefeee; padding: 10px; border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-      display: none;
-      flex-direction: column;
-      font-size: 14px;
-      gap: 6px;
-    `;
+      display: none; flex-direction: column; font-size: 14px; gap: 6px;`
+
     panel.innerHTML = `
       <label><input type="checkbox" id="mj-enable"> 启用翻译</label>
       <label><input type="radio" name="mj-lang" value="zh-Hans"> 简体</label>
       <label><input type="radio" name="mj-lang" value="zh-Hant"> 繁體</label>
-      <button id="mj-clear-cache" style="margin-top: 8px;">清除缓存</button>
-    `;
+      <button id="mj-clear-cache" style="margin-top: 8px;">清除缓存</button>`
 
     document.body.appendChild(btn);
     document.body.appendChild(panel);
@@ -142,22 +125,16 @@
 
     function schedulePanelClose(delay = 3000) {
       clearTimeout(autoCloseTimer);
-      autoCloseTimer = setTimeout(() => {
-        panel.style.display = 'none';
-      }, delay);
+      autoCloseTimer = setTimeout(() => panel.style.display = 'none', delay);
     }
 
     btn.addEventListener('click', () => {
       panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
     });
 
-    setTimeout(() => {
-      document.addEventListener('click', (e) => {
-        if (!panel.contains(e.target) && !btn.contains(e.target)) {
-          panel.style.display = 'none';
-        }
-      });
-    }, 0);
+    document.addEventListener('click', (e) => {
+      if (!panel.contains(e.target) && !btn.contains(e.target)) panel.style.display = 'none';
+    });
 
     panel.addEventListener('mouseenter', () => clearTimeout(autoCloseTimer));
     panel.addEventListener('mouseleave', () => schedulePanelClose());
