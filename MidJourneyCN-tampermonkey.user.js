@@ -57,10 +57,23 @@
 
   function processNode(node) {
     if (!config.enabled || !node || !document.body.contains(node)) return;
+
+    const translateAttributes = (el) => {
+      const dict = getDict();
+      ['title', 'aria-label', 'alt'].forEach(attr => {
+        const val = el.getAttribute(attr);
+        if (val && dict[val.trim()]) {
+          el.setAttribute(attr, dict[val.trim()]);
+          el.dataset.translated = 'true';
+        }
+      });
+    };
+
     if (node.nodeType === 3) {
       const translated = translateText(node.textContent);
       if (translated && translated !== node.textContent) node.textContent = translated;
     } else if (node.nodeType === 1 && !node.dataset.translated) {
+      translateAttributes(node);
       if (node.childNodes.length === 1 && node.firstChild.nodeType === 3) {
         const translated = translateText(node.textContent);
         if (translated && translated !== node.textContent) {
@@ -125,7 +138,9 @@
 
     function schedulePanelClose(delay = 3000) {
       clearTimeout(autoCloseTimer);
-      autoCloseTimer = setTimeout(() => panel.style.display = 'none', delay);
+      autoCloseTimer = setTimeout(() => {
+        panel.style.display = 'none';
+      }, delay);
     }
 
     btn.addEventListener('click', () => {
