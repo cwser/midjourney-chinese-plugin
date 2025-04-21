@@ -22,11 +22,27 @@
   let dictHans = {};
   let dictHant = {};
 
-  async function loadDictionary() {
+  async function loadDictionary(forceReload = false) {
+    const cacheKey = 'mj-trans-dict-cache';
+    const cache = JSON.parse(localStorage.getItem(cacheKey) || '{}');
+    const now = Date.now();
+
+    if (!forceReload && cache.timestamp && now - cache.timestamp < 6 * 60 * 60 * 1000) {
+      dictHans = cache.dictHans || {};
+      dictHant = cache.dictHant || {};
+      return;
+    }
+
     const resHans = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/refs/heads/main/lang/zh-CN.json');
     dictHans = await resHans.json();
     const resHant = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/refs/heads/main/lang/zh-TW.json');
     dictHant = await resHant.json();
+
+    localStorage.setItem(cacheKey, JSON.stringify({
+      timestamp: now,
+      dictHans,
+      dictHant
+    }));
   }
 
   function getDict() {
@@ -116,6 +132,7 @@
       <label><input type="checkbox" id="mj-enable"> 启用翻译</label>
       <label><input type="radio" name="mj-lang" value="zh-Hans"> 简体</label>
       <label><input type="radio" name="mj-lang" value="zh-Hant"> 繁體</label>
+      <button id="mj-clear-cache" style="margin-top: 8px;">清除缓存</button>
     `;
 
     document.body.appendChild(btn);
@@ -144,6 +161,12 @@
 
     panel.addEventListener('mouseenter', () => clearTimeout(autoCloseTimer));
     panel.addEventListener('mouseleave', () => schedulePanelClose());
+
+    document.getElementById('mj-clear-cache').addEventListener('click', () => {
+      localStorage.removeItem('mj-trans-dict-cache');
+      alert('缓存已清除，将重新加载词典');
+      location.reload();
+    });
 
     const enableCheckbox = document.getElementById('mj-enable');
     enableCheckbox.checked = config.enabled;
