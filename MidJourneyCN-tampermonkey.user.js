@@ -12,365 +12,164 @@
 // ==/UserScript==
 
 (function () {
-    'use strict';
+  'use strict';
 
-    // 翻译词条字典
-    const translationMap = {
-    "Character References": "角色参考",
-    "Use a character's likeness": "使用角色外貌",
-    "Select Personalizations": "选择个性内容",
-    "Create much faster with draft quality images.": "以草图质量快速创作",
-    "Today": "今天",
-    "Click for more": "点击查看更多",
-    "Copy the prompt into the input bar": "将提示词复制到输入框中",
-    "Add to input as a style reference": "作为风格参考添加到输入中",
-    "Add to input as an image prompt": "作为图像提示词添加到输入中",
-    "Edit specific parts of the image, with or without a prompt change": "编辑图像的特定部分，可选择是否更改提示词",
-    "Rerun a Draft job at full quality.": "以完整质量重新运行草图任务。",
-    "Run the same prompt again": "使用相同提示词重新生成",
-    "Same as 1.5x, but you can specify the zoom amount": "与 1.5x 类似，但可自定义缩放倍数",
-    "Expand the image to 1.5 times the size, maintaining the aspect ratio": "将图像扩大为原始尺寸的 1.5 倍，保持宽高比",
-    "Create a new image with extra content around the outside of the original.": "在原图周围扩展内容生成新图像。",
-    "The arrow points in the direction you want to create more content in": "箭头表示你想要扩展内容的方向",
-    "Create wider or taller images by adding extra content in a specified direction.": "通过在特定方向添加内容生成更宽或更高的图像。",
-    "Larger differences, for moving in a new direction": "探索新方向，差异更大",
-    "Smaller differences, for fine tuning an image": "微调图像，差异更小",
-    "Build upon this image by creating similar ones with a new or updated prompt.": "基于此图像通过新提示词生成类似图像。",
-    "Create a larger version of the image, ideal for sharing, saving, or printing.": "创建更大尺寸图像，适合分享、保存或打印。",
-    "Makes broader changes to the image": "对图像进行较大幅度更改",
-    "Makes minor changes to the image": "对图像进行轻微更改",
-    "Make images similar to this one, with slight changes.": "生成与此图相似但略有差异的图像。",
-    "Shortcut": "快捷方式",
-    "Generates at a much faster rate, but spends twice as many Fast Hours": "以更快的速度生成图像，但消耗双倍快速时长",
-    "The default speed. Generates at a moderate rate and spends Fast Hours": "默认速度。以中等速率生成图像并消耗快速时长",
-    "Generates at a slower, variable rate, but won't spend Fast Hours. Not available on the Basic plan": "以较慢、可变速率生成图像，但不会消耗快速时长。在基础套餐中不可用",
-    "The speed at which the images generate.": "图像生成的速度。",
-    "Midjourney routinely releases new model versions to improve efficiency, coherency, and quality. The latest model is the default, but each model excels at producing different types of images.": "Midjourney 会定期发布新模型，以提升效率、连贯性和质量。最新模型为默认模型，但每种模型在生成不同类型图像方面各有优势。",
-    "Raw mode replaces the default aesthetic of some Midjourney Model Versions. Using it can help you create more photo-realistic images, cinematic scenes, or cuter characters.": "原始模式会替代某些 Midjourney 模型版本的默认美学风格。启用它可以帮助你生成更真实的图像、电影画面，或更可爱的角色。",
-    "Influences how varied the images are. High values will produce more unusual and unexpected results and compositions. Lower values have more reliable, repeatable results": "影响图像的多样性。较高的数值将带来更不寻常和不可预测的结果与构图；较低数值更具可控性与可重复性。",
-    "Introduces quirky qualities to your generated images, resulting in unique and unexpected outcomes": "为生成的图像引入独特特质，从而带来独特且出人意料的结果",
-    "Influences how strongly the Midjourney aesthetic is applied. Low stylization values produce images that closely match the prompt but are less artistic. High stylization values create images that are very artistic but less connected to the prompt": "影响 Midjourney 风格化效果的强度。较低的风格化值会生成更贴近提示词但艺术感较弱的图像；较高的风格化值会生成更具艺术性的图像，但与提示词联系较弱。",
-    "Cancel": "取消",
-    "Isolate": "隔离",
-    "Remove": "移除",
-    "Folder name": "文件夹名称",
-    "New Folder Group": "新建文件夹组",
-    "New Folder": "新建文件夹",
-    "Folders let you organize your images.": "文件夹可以帮助你整理图像。",
-    "No folders yet": "暂无文件夹",
-    "Select Input Device": "选择输入设备",
-    "Start Voice Mode": "开启语音模式",
-    "Edit Your Images": "编辑你的图像",
-    "Generate a matching prompt with our Describe tool.": "使用 Describe 工具生成匹配的提示词。",
-    "Can't quite describe the image you're editing?": "无法准确描述你正在编辑的图像？",
-    "Suggest a Prompt": "建议提示词",
-    "Fast generations": "快速生成",
-    "Standard Plan Features": "标准套餐功能",
-    "Remaining Fast Hours": ": \"剩余快速生成时间：",
-    "Deselect all": "取消全选",
-    "Hide image": "隐藏图片",
-    "I'm neutral on this image": "我对这张图没有特别看法",
-    "I don't like this image": "我不喜欢这张图",
-    "I like this image": "我喜欢这张图",
-    "Help us improve V7": "帮助我们改进 V7",
-    "Conversational Mode": "对话模式",
-    "Conversationally iterate your prompt over text or voice.": "通过文本或语音对提示词进行对话式迭代",
-    "Yesterday": "昨天",
-    "Retexture will change the contents of the input image while trying to preserve the original structure.": "重新纹理将改变输入图像内容，同时尽量保留原始结构。",
-    "For good results, avoid using prompts that are incompatible with the general structure of the image.": "为获得更好效果，请避免使用与图像整体结构不兼容的提示词。",
-    "Enhance": "增强",
-    "Rename": "重命名",
-    "View Creations": "查看创作",
-    "Delete": "删除",
-    "Remix": "混合变换",
-    "Pan": "平移",
-    "Zoom": "缩放",
-    "More actions": "更多操作",
-    "Use in prompt": "用于提示词",
-    "Use Profile": "使用配置档",
-    "Vary Subtle": "轻微变化",
-    "Vary Strong": "大幅变化",
-    "Subtle": "轻微",
-    "Strong": "强烈",
-    "Creative": "创意",
-    "Vary": "变化",
-    "Upscale": "放大",
-    "Creation Actions": "创作操作",
-    "More options": "更多选项",
-    "Editor": "编辑器",
-    "use text": "使用文本",
-    "Continue ranking": "继续排序",
-    "Add images": "添加图像",
-    "Imagine": "想象",
-    "Moodboard": "情绪板",
-    "Set as Default": "设为默认",
-    "Use in Prompt": "在提示词中使用",
-    "Upload Images": "上传图像",
-    "Add from Link": "通过链接添加",
-    "Add from Gallery": "从图库添加",
-    "Add images with the buttons above to get started": "使用上方按钮添加图像以开始",
-    "Once you have at least one image, you can begin to personalize": "至少添加一张图像后，即可开始个性化设置",
-    "Copy": "复制",
-    "Report": "举报",
-    "Download": "下载",
-    "Open in Discord": "在 Discord 中打开",
-    "Job ID": "任务 ID",
-    "Image": "图像",
-    "Image URL": "图像链接",
-    "Report Policy Violation": "举报政策违规",
-    "Report Copyright": "举报版权问题",
-    "Rerun": "重新生成",
-    "Use": "使用",
-    "Hide": "隐藏",
-    "More": "更多",
-    "Dark Mode": "深色模式",
-    "Light Mode": "亮色模式",
-    "System": "跟随系统",
-    "Selected": "已选择",
-    "Teach Midjourney about what you find beautiful.": "告诉 Midjourney 你觉得什么是美的。",
-    "Create Personalization Profiles to teach Midjourney what you like. Add images to Moodboards to give Midjourney visual inspiration.": "创建个性化配置档，告诉 Midjourney 你的喜好。将图像添加到情绪板，为 Midjourney 提供视觉灵感。",
-    "SubmitEdit": "提交编辑",
-    "SubmitRetexture": "提交重绘",
-    "Lobby": "大厅",
-    "General Chaos": "混沌大厅",
-    "A room for general purpose creation, discussion, and chaos": "用于创作、讨论与交流的综合频道",
-    "All Images": "全部图像",
-    "Your Images": "你的图像",
-    "Show other's creations": ": \"显示他人创作：",
-    "immediately": "立即显示",
-    "once in progress": "进行时显示一次",
-    "once completed": "完成后显示一次",
-    "auto": "自动",
-    "All": "全部",
-    "Public": "公开",
-    "Private": "私密",
-    "Yours": "你的",
-    "ROOM": "房间",
-    "OWNER": "拥有者",
-    "ACTIVE": "活跃状态",
-    "VOICE CHAT": "语音频道",
-    "ACTIVITY": "动态",
-    "Create Room": "创建房间",
-    "Add Search": "添加搜索",
-    "Create Profile": "创建配置文件",
-    "Rating": "评分",
-    "Liked": "喜欢",
-    "Unrated": "未评分",
-    "Hidden": "隐藏",
-    "Type": "类型",
-    "Grids": "九宫格图",
-    "Upscales": "放大图",
-    "See more": "展开更多",
-    "See less": "收起",
-    "Other": "其他",
-    "Tiled": "平铺",
-    "Not in folders": "未分类",
-    "Layout": "布局",
-    "Full": "全幅",
-    "Small": "小",
-    "Medium": "中",
-    "Large": "大",
-    "Create Ranked Profile": "创建排名配置",
-    "Select from pairs of Midjourney images to teach the model about your preferences.": "从 Midjourney 图像对中选择，用于训练模型了解你的偏好。",
-    "Create Moodboard": "创建灵感板",
-    "Collect uploaded or generated images to show your target style.": "收集上传或生成的图像，以展示你的目标风格。",
-    "Images": "图像",
-    "Rankings": "排名",
-    "Folders": "文件夹",
-    "Personalization On": "个性化开启",
-    "Personalization Off": "个性化关闭",
-    "Ranked Profiles": "排名配置",
-    "Show V6 profiles": "显示 V6 配置",
-    "Add Images": "添加图片",
-    "Settings": "设置",
-    "Search": "搜索",
-    "Randomize": "随机生成",
-    "Draft Mode": "草稿模式",
-    "Account Settings": "账户设置",
-    "Manage Subscription": "订阅管理",
-    "Go To Discord": "前往 Discord",
-    "Manage Uploads": "上传管理",
-    "Midjourney Magazine": "Midjourney 杂志",
-    "Log Out": "退出登录",
-    "Explore": "探索",
-    "Create": "创建",
-    "Edit": "编辑",
-    "Retexture": "纹理重绘",
-    "Personalize": "个性化",
-    "Organize": "整理",
-    "Prompt": "提示词",
-    "Prompt Craft": "提示词工坊",
-    "Daily Theme": "每日主题",
-    "Newbies": "新手区",
-    "Image Size": "图像尺寸",
-    "Square": "方形",
-    "Portrait": "竖版",
-    "Landscape": "横版",
-    "Relax": "放松",
-    "Fast": "快速",
-    "Turbo": "极速",
-    "Speed": "速度",
-    "Mode": "模式",
-    "Standard": "标准",
-    "Raw": "原始",
-    "Draft": "草稿",
-    "Model": "模型",
-    "Version": "版本",
-    "Stylization": "风格化",
-    "Style": "风格",
-    "Stylize": "风格化",
-    "Style Strength": "风格强度",
-    "Weirdness": "怪异程度",
-    "Variety": "多样性",
-    "Tile": "拼贴",
-    "Seed": "种子",
-    "More Options": "更多选项",
-    "Aesthetics": "美学",
-    "Move / Resize": "移动 / 缩放",
-    "Erase": "擦除",
-    "Restore": "恢复",
-    "Select": "选择",
-    "Undo": "撤销",
-    "Redo": "重做",
-    "Reset": "重置",
-    "Suggest Prompt": "推荐提示词",
-    "Edit from URL": "从链接编辑",
-    "Edit Uploaded Image": "编辑上传图片",
-    "Submit": "提交",
-    "View All": "查看全部",
-    "New": "新建",
-    "What will you imagine?": "你想象什么？",
-    "Rate more images": "评分更多图片",
-    "Profiles": "配置档",
-    "Global V7 Profile": "V7 全局配置档",
-    "Default": "默认",
-    "Moodboards": "情绪板",
-    "Random": "随机",
-    "Hot": "热门",
-    "Top Day": "今日最佳",
-    "Top Week": "本周最佳",
-    "Top Month": "本月最佳",
-    "Likes": "喜爱",
-    "Brush Size": "笔刷大小",
-    "Image Scale": "图像缩放",
-    "Aspect Ratio": "纵横比",
-    "Export": "导出",
-    "Upscale to Gallery": "放大保存至图库",
-    "Download Image": "下载图片",
-    "Saved Searches": "已保存搜索",
-    "Filters": "筛选器",
-    "View Options": "视图选项",
-    "Tasks": "任务",
-    "Help": "帮助",
-    "Updates": "更新",
-    "Image Prompts": "图像提示词",
-    "Style References": "风格参考",
-    "Edit New Image": "编辑新图像",
-    "Recent": "最近",
-    "Use the elements of an image": "使用图像的元素",
-    "Click or drag to add": "点击或拖动添加",
-    "Use the style of an image": "使用图像的风格",
-    "Keep Image Prompts": "保留图像提示词",
-    "Clear Image Prompts": "清除图像提示词",
-    "Title": "标题",
-    "Search Terms": "搜索词",
-    "comma separated": "逗号分隔",
-    "Create Saved Search": "创建已保存搜索",
-    "Add saved search": "添加已保存搜索",
-    "Select all": "全选",
-    "Variation": "变体",
-    "Use as Image Prompt": "用作图像提示词",
-    "Edit Prompt": "编辑提示词",
-    "Search Image": "搜索图像",
-    "Like Image": "喜欢图像",
-    "Open in Editor": "在编辑器中打开",
-    "Back": "返回",
-    "Subject": "主题",
-    "Descriptors": "描述词",
-    "Known Artists": "知名艺术家",
-    "Announcements": "公告",
-    "Information": "信息",
-    "Changelog": "更新日志",
-    "Show in All": "显示在全部",
-    "Notify": "通知",
-    "Choose the plan that works for you": "选择适合你的订阅方案",
-    "Your Standard Plan": "你的标准套餐",
-    "Usage Details": "使用详情",
-    "Included": "已包含",
-    "Purchased & Awarded": "购买与奖励",
-    "Hours refresh on": "时间刷新于",
-    "Buy more Fast hours": "购买更多快速时间",
-    "15h Fast generations": "15 小时快速生成",
-    "General commercial terms": "通用商业条款",
-    "Optional credit top ups": "可选积分充值",
-    "3 concurrent fast jobs": "3 个并行快速任务",
-    "Unlimited Relaxed generations": "无限慢速生成",
-    "Cancel Plan": "取消套餐",
-    "Change Plan": "更改套餐",
-    "Billing & Payment": "账单与支付",
-    "Price": "价格",
-    "Billing period": "计费周期",
-    "Renewal date": "续费日期",
-    "Edit Billing": "编辑账单",
-    "View Invoices": "查看发票",
-    "Yearly Billing": "年付",
-    "Monthly Billing": "月付",
-    "Basic Plan": "基础套餐",
-    "Downgrade Plan": "降级套餐",
-    "View monthly billing": "查看月度账单",
-    "Limited generations (~200 / month)": "生成数量限制（约 200 次 / 月）",
-    "Active": "已激活",
-    "Pro Plan": "专业套餐",
-    "30h Fast generations": "30 小时快速生成",
-    "12 concurrent fast jobs": "12 个并行快速任务",
-    "Stealth image generation": "隐身图像生成",
-    "Mega Plan": "旗舰套餐",
-    "60h Fast generations": "60 小时快速生成",
-    "Submit to pair rankings": "提交至配对排序",
-    "% Complete": "% 已完成",
-    "v7 Feedback": "V7 反馈",
-    "Given": "已提交",
-    "Missing": "未提交"
-        // 👉 请粘贴你提供的完整版 translationMap 替换这里
-    };
+  const config = JSON.parse(localStorage.getItem('mj-trans-config')) || {
+    enabled: true,
+    lang: 'zh-Hans'
+  };
 
-    // 核心替换逻辑
-    function translateTextNode(node) {
-        if (node.nodeType === Node.TEXT_NODE) {
-            let text = node.nodeValue;
-            for (const [en, zh] of Object.entries(translationMap)) {
-                const regex = new RegExp(`\\b${en.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`, 'g');
-                text = text.replace(regex, zh);
-            }
-            node.nodeValue = text;
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-            for (const attr of ['alt', 'title', 'placeholder', 'aria-label']) {
-                if (node.hasAttribute && node.hasAttribute(attr)) {
-                    let attrValue = node.getAttribute(attr);
-                    for (const [en, zh] of Object.entries(translationMap)) {
-                        attrValue = attrValue.replace(new RegExp(en, 'g'), zh);
-                    }
-                    node.setAttribute(attr, attrValue);
-                }
-            }
-            node.childNodes.forEach(translateTextNode);
+  let dictHans = {};
+  let dictHant = {};
+
+  async function loadDictionary() {
+    const resHans = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/refs/heads/main/lang/zh-CN.json');
+    dictHans = await resHans.json();
+    const resHant = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/refs/heads/main/lang/zh-TW.json');
+    dictHant = await resHant.json();
+  }
+
+  function getDict() {
+    return config.lang === 'zh-Hant' ? dictHant : dictHans;
+  }
+
+  function translateText(text) {
+    const dict = getDict();
+    return dict[text.trim()] || text;
+  }
+
+  function processNode(node) {
+    if (!config.enabled) return;
+    if (node.nodeType === 3) {
+      const translated = translateText(node.textContent);
+      if (translated && translated !== node.textContent) {
+        node.textContent = translated;
+      }
+    } else if (node.nodeType === 1 && !node.dataset.translated) {
+      if (node.childNodes.length === 1 && node.firstChild.nodeType === 3) {
+        const translated = translateText(node.textContent);
+        if (translated && translated !== node.textContent) {
+          node.textContent = translated;
+          node.dataset.translated = 'true';
         }
+      }
+      Array.from(node.childNodes).forEach(processNode);
+    }
+  }
+
+  function translateAll() {
+    if (!config.enabled) return;
+    processNode(document.body);
+  }
+
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(m => {
+      m.addedNodes.forEach(n => processNode(n));
+    });
+  });
+
+  function initObserver() {
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  }
+
+  function createControlPanel() {
+    const btn = document.createElement('div');
+    btn.id = 'mj-trans-btn';
+    btn.innerText = '🌐';
+    btn.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      width: 40px;
+      height: 40px;
+      background: #000000cc;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.6;
+    `;
+
+    const panel = document.createElement('div');
+    panel.id = 'mj-trans-panel';
+    panel.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 70px;
+      z-index: 9998;
+      background: #ffffffee;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      display: none;
+      flex-direction: column;
+      font-size: 14px;
+      gap: 6px;
+    `;
+    panel.innerHTML = `
+      <label><input type="checkbox" id="mj-enable"> 启用翻译</label>
+      <label><input type="radio" name="mj-lang" value="zh-Hans"> 简体</label>
+      <label><input type="radio" name="mj-lang" value="zh-Hant"> 繁體</label>
+    `;
+
+    document.body.appendChild(btn);
+    document.body.appendChild(panel);
+
+    let autoCloseTimer = null;
+
+    function schedulePanelClose(delay = 3000) {
+      clearTimeout(autoCloseTimer);
+      autoCloseTimer = setTimeout(() => {
+        panel.style.display = 'none';
+      }, delay);
     }
 
-    // 翻译整页
-    function translatePage() {
-        translateTextNode(document.body);
-    }
-
-    // 监听页面内容变化，翻译新增节点
-    const observer = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
-            mutation.addedNodes.forEach(translateTextNode);
-        });
+    btn.addEventListener('click', () => {
+      panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
     });
 
-    observer.observe(document.body, { childList: true, subtree: true });
+    setTimeout(() => {
+      document.addEventListener('click', (e) => {
+        if (!panel.contains(e.target) && !btn.contains(e.target)) {
+          panel.style.display = 'none';
+        }
+      });
+    }, 0);
 
-    // 页面加载后立即执行一次翻译
-    window.addEventListener('load', translatePage);
+    panel.addEventListener('mouseenter', () => clearTimeout(autoCloseTimer));
+    panel.addEventListener('mouseleave', () => schedulePanelClose());
+
+    const enableCheckbox = document.getElementById('mj-enable');
+    enableCheckbox.checked = config.enabled;
+    enableCheckbox.addEventListener('change', (e) => {
+      config.enabled = e.target.checked;
+      localStorage.setItem('mj-trans-config', JSON.stringify(config));
+      location.reload();
+    });
+
+    const langRadios = document.querySelectorAll('input[name="mj-lang"]');
+    langRadios.forEach(radio => {
+      if (radio.value === config.lang) radio.checked = true;
+      radio.addEventListener('change', (e) => {
+        config.lang = e.target.value;
+        localStorage.setItem('mj-trans-config', JSON.stringify(config));
+        location.reload();
+      });
+    });
+  }
+
+  window.addEventListener('load', async () => {
+    await loadDictionary();
+    createControlPanel();
+    if (config.enabled) {
+      translateAll();
+      initObserver();
+    }
+  });
 })();
