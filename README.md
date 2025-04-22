@@ -2,9 +2,10 @@
   <img src="https://github.com/cwser/midjourney-chinese-plugin/blob/main/iocn/icon.svg?raw=true" width="100" alt="插件图标">
 </p>
 
-# 🧩 MidjourneyCN Pro 中文增强插件 v4.0.0
+# 🧩 MidjourneyCN Pro 中文增强插件
 
-**一款适用于 MidJourney 的浏览器中文插件，支持 MidJourney 全站界面汉化、提示词翻译、图像编辑器翻译、风格评分翻译等功能。适配最新 V6 / V7 模式，是目前最完整的 MidJourney 中文解决方案。**
+**为 [MidJourney 官网](https://www.midjourney.com/) 提供完整中文界面翻译支持，涵盖按钮、菜单、提示气泡、设置项等核心 UI。  
+支持 **简体 / 繁体切换**、**词典远程加载与缓存优化**、**动态内容监听翻译**，可作为油猴脚本或 Chrome 插件安装使用。**
 
 ---
 
@@ -16,15 +17,21 @@
 
 ## ✨ 插件亮点
 
-- 🌐 全面汉化 MidJourney 网站界面，支持图像编辑器、评分、变体、搜索、信息查看等常用模块
-- ⚙️ 支持动态元素翻译（弹窗、悬浮提示、下拉菜单、浮窗按钮等）
-- 🌒 自动适配深色 / 浅色模式，视觉统一
-- 🧠 自动隐藏英文残留，界面简洁清爽
-- 📁 插件纯本地运行，无需联网，加载即用、无广告、无追踪
+- 🈯 **精准翻译**：仅翻译原生界面元素（按钮/标签/提示等），**不干扰用户聊天内容和图片描述**；
+- 🔁 **简繁切换**：一键切换简体 / 繁体中文，界面实时更新；
+- 📦 **词典缓存机制**：翻译词条来自远程 JSON，可缓存到本地，节省加载时间；
+- ⚡ **实时翻译**：监听页面动态节点变化（如弹窗、下拉菜单等），自动翻译新出现的内容；
+- 🧩 **控制面板**：右下角悬浮按钮支持翻译开关、语言切换、缓存清理等操作；
+- 🧠 **结构清晰**：核心逻辑独立封装，便于升级与二次开发。
 
 ---
 
 ## 📦 安装方式
+
+### ✅ 油猴脚本（Tampermonkey）
+
+1. 安装浏览器插件 [Tampermonkey](https://www.tampermonkey.net/)；
+2. 打开脚本安装地址 [点击安装](https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/MidJourneyCN-tampermonkey.user.js)；
 
 ### 🚀 Chrome 浏览器安装步骤
 
