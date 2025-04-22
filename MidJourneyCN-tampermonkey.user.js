@@ -21,6 +21,7 @@
 
   let dictHans = {};
   let dictHant = {};
+  let dictLoaded = false;
 
   async function loadDictionary(forceReload = false) {
     const cacheKey = 'mj-trans-dict-cache';
@@ -30,19 +31,30 @@
     if (!forceReload && cache.timestamp && now - cache.timestamp < 6 * 60 * 60 * 1000) {
       dictHans = cache.dictHans || {};
       dictHant = cache.dictHant || {};
+      dictLoaded = true;
       return;
     }
 
-    const resHans = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/lang/zh-CN.json');
-    dictHans = await resHans.json();
-    const resHant = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/lang/zh-TW.json');
-    dictHant = await resHant.json();
+    try {
+      const resHans = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/lang/zh-CN.json');
+      const resHant = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/lang/zh-TW.json');
 
-    localStorage.setItem(cacheKey, JSON.stringify({
-      timestamp: now,
-      dictHans,
-      dictHant
-    }));
+      dictHans = await resHans.json();
+      dictHant = await resHant.json();
+
+      localStorage.setItem(cacheKey, JSON.stringify({
+        timestamp: now,
+        dictHans,
+        dictHant
+      }));
+
+      dictLoaded = true;
+    } catch (err) {
+      console.error('词典加载失败：', err);
+      dictHans = {};
+      dictHant = {};
+      dictLoaded = false;
+    }
   }
 
   function getDict() {
@@ -86,7 +98,7 @@
   }
 
   function translateAll() {
-    if (!config.enabled) return;
+    if (!config.enabled || !dictLoaded) return;
     processNode(document.body);
   }
 
@@ -115,7 +127,7 @@
       width: 40px; height: 40px;
       background: #000c; color: #fff; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; opacity: 0.6; backdrop-filter: blur(4px);`
+      cursor: pointer; opacity: 0.6; backdrop-filter: blur(4px);`;
 
     const panel = document.createElement('div');
     panel.id = 'mj-trans-panel';
@@ -123,13 +135,14 @@
       position: fixed; bottom: 20px; right: 70px; z-index: 9998;
       background: #fffefeee; padding: 10px; border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-      display: none; flex-direction: column; font-size: 14px; gap: 6px;`
+      display: none; flex-direction: column; font-size: 14px; gap: 6px;`;
 
     panel.innerHTML = `
       <label><input type="checkbox" id="mj-enable"> 启用翻译</label>
       <label><input type="radio" name="mj-lang" value="zh-Hans"> 简体</label>
       <label><input type="radio" name="mj-lang" value="zh-Hant"> 繁體</label>
-      <button id="mj-clear-cache" style="margin-top: 8px;">清除缓存</button>`
+      <button id="mj-clear-cache" style="margin-top: 8px;">清除缓存</button>
+      ${!dictLoaded ? `<div style="color: red; font-size: 12px;">⚠️ 翻译词典加载失败</div>` : ''}`;
 
     document.body.appendChild(btn);
     document.body.appendChild(panel);
@@ -182,7 +195,7 @@
   window.addEventListener('load', async () => {
     await loadDictionary();
     createControlPanel();
-    if (config.enabled) {
+    if (config.enabled && dictLoaded) {
       translateAll();
       initObserver();
     }
