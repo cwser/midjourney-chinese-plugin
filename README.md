@@ -28,7 +28,7 @@
 
 ## 📦 安装方式
 
-### ✅ 油猴脚本（Tampermonkey）
+### ✅ 推荐油猴脚本（Tampermonkey）
 
 1. 安装浏览器插件 [Tampermonkey](https://www.tampermonkey.net/)；
 2. 打开脚本安装地址 [点击安装](https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/MidJourneyCN-tampermonkey.user.js)；
