@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MidJourneyCN
 // @namespace    http://tampermonkey.net/
-// @version      1.0.2
+// @version      1.0.0
 // @description  将 MidJourney 网站英文界面翻译为中文，稳定增强版（支持简繁切换、缓存、自动更新、动态监听增强）
 // @author       G哥
 // @match        https://www.midjourney.com/*
@@ -14,7 +14,6 @@
 (function () {
   'use strict';
 
-  // 配置初始化
   const config = JSON.parse(localStorage.getItem('mj-trans-config')) || {
     enabled: true,
     lang: 'zh-Hans'
@@ -23,25 +22,20 @@
   let dictHans = {};
   let dictHant = {};
 
-  // 加载字典并优化缓存逻辑
   async function loadDictionary(forceReload = false) {
     const cacheKey = 'mj-trans-dict-cache';
     const cache = JSON.parse(localStorage.getItem(cacheKey) || '{}');
     const now = Date.now();
 
-    // 如果缓存有效，直接使用缓存
     if (!forceReload && cache.timestamp && now - cache.timestamp < 6 * 60 * 60 * 1000) {
       dictHans = cache.dictHans || {};
       dictHant = cache.dictHant || {};
       return;
     }
 
-    const [resHans, resHant] = await Promise.all([
-      fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/lang/zh-CN.json'),
-      fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/lang/zh-TW.json')
-    ]);
-
+    const resHans = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/lang/zh-CN.json');
     dictHans = await resHans.json();
+    const resHant = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/lang/zh-TW.json');
     dictHant = await resHant.json();
 
     localStorage.setItem(cacheKey, JSON.stringify({
@@ -55,14 +49,12 @@
     return config.lang === 'zh-Hant' ? dictHant : dictHans;
   }
 
-  // 翻译文本
   function translateText(text) {
     const dict = getDict();
     const cleaned = text.trim();
     return dict[cleaned] || text;
   }
 
-  // 处理节点，翻译文本和属性
   function processNode(node) {
     if (!config.enabled || !node || !document.body.contains(node)) return;
 
@@ -77,10 +69,10 @@
       });
     };
 
-    if (node.nodeType === 3) { // 文本节点
+    if (node.nodeType === 3) {
       const translated = translateText(node.textContent);
       if (translated && translated !== node.textContent) node.textContent = translated;
-    } else if (node.nodeType === 1 && !node.dataset.translated) { // 元素节点
+    } else if (node.nodeType === 1 && !node.dataset.translated) {
       translateAttributes(node);
       if (node.childNodes.length === 1 && node.firstChild.nodeType === 3) {
         const translated = translateText(node.textContent);
@@ -93,13 +85,11 @@
     }
   }
 
-  // 翻译所有内容
   function translateAll() {
     if (!config.enabled) return;
     processNode(document.body);
   }
 
-  // MutationObserver 监听新增节点并翻译
   const observer = new MutationObserver(mutations => {
     mutations.forEach(m => {
       m.addedNodes.forEach(n => processNode(n));
@@ -107,7 +97,6 @@
     });
   });
 
-  // 初始化观察者
   function initObserver() {
     observer.observe(document.body, {
       childList: true,
@@ -117,28 +106,7 @@
     });
   }
 
-  // 创建控制面板，UI优化
   function createControlPanel() {
-    // 确保面板DOM节点不会被移除，直接操作它的显示状态
-    let panel = document.getElementById('mj-trans-panel');
-    if (!panel) {
-      panel = document.createElement('div');
-      panel.id = 'mj-trans-panel';
-      panel.style.cssText = `
-        position: fixed; bottom: 20px; right: 70px; z-index: 9998;
-        background: #fffefeee; padding: 10px; border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-        display: none; flex-direction: column; font-size: 14px; gap: 6px;`;
-
-      panel.innerHTML = `
-        <label><input type="checkbox" id="mj-enable"> 启用翻译</label>
-        <label><input type="radio" name="mj-lang" value="zh-Hans"> 简体</label>
-        <label><input type="radio" name="mj-lang" value="zh-Hant"> 繁體</label>
-        <button id="mj-clear-cache" style="margin-top: 8px;">清除缓存</button>`;
-
-      document.body.appendChild(panel);
-    }
-
     const btn = document.createElement('div');
     btn.id = 'mj-trans-btn';
     btn.innerText = '🌐';
@@ -147,9 +115,24 @@
       width: 40px; height: 40px;
       background: #000c; color: #fff; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; opacity: 0.6; backdrop-filter: blur(4px);`;
+      cursor: pointer; opacity: 0.6; backdrop-filter: blur(4px);`
+
+    const panel = document.createElement('div');
+    panel.id = 'mj-trans-panel';
+    panel.style.cssText = `
+      position: fixed; bottom: 20px; right: 70px; z-index: 9998;
+      background: #fffefeee; padding: 10px; border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      display: none; flex-direction: column; font-size: 14px; gap: 6px;`
+
+    panel.innerHTML = `
+      <label><input type="checkbox" id="mj-enable"> 启用翻译</label>
+      <label><input type="radio" name="mj-lang" value="zh-Hans"> 简体</label>
+      <label><input type="radio" name="mj-lang" value="zh-Hant"> 繁體</label>
+      <button id="mj-clear-cache" style="margin-top: 8px;">清除缓存</button>`
 
     document.body.appendChild(btn);
+    document.body.appendChild(panel);
 
     let autoCloseTimer = null;
 
@@ -196,7 +179,6 @@
     });
   }
 
-  // 页面加载时初始化
   window.addEventListener('load', async () => {
     await loadDictionary();
     createControlPanel();
@@ -205,12 +187,4 @@
       initObserver();
     }
   });
-
-  // 保持翻译状态
-  window.addEventListener('popstate', () => {
-    if (config.enabled) {
-      translateAll();
-    }
-  });
-
 })();
