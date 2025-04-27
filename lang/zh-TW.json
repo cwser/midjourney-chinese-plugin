@@ -1,9 +1,9 @@
 {
-  "Run all prompts": "執行所有提示詞",
-  "No folders yet": "尚無資料夾",
-  "Folders let you organize your images.": "資料夾可協助你整理圖片。",
+  "Run all prompts": "運行所有提示詞",
+  "No folders yet": "暫無資料夾",
+  "Folders let you organize your images.": "資料夾可説明你整理圖片。",
   "New Folder": "新建資料夾",
-  "Retexture will change the contents of the input image while trying to preserve the original structure.": "重繪將改變輸入圖像的內容，同時盡量保留原始結構。",
+  "Retexture will change the contents of the input image while trying to preserve the original structure.": "重繪將改變輸入圖像的內容，同時儘量保留原始結構。",
   "Use as Image Prompt": "作為圖像提示詞使用",
   "Edit Prompt": "編輯提示詞",
   "To Top": "回到頂部",
