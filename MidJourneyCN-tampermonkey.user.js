@@ -7,8 +7,8 @@
 // @match        https://www.midjourney.com/*
 // @grant        none
 // @run-at       document-end
-// @updateURL    https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/MidJourneyCN-tampermonkey.user.js
-// @downloadURL  https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/MidJourneyCN-tampermonkey.user.js
+// @updateURL    https://cdn.jsdelivr.net/gh/cwser/midjourney-chinese-plugin@main/MidJourneyCN-tampermonkey.user.js
+// @downloadURL  https://cdn.jsdelivr.net/gh/cwser/midjourney-chinese-plugin@main/MidJourneyCN-tampermonkey.user.js
 // ==/UserScript==
 
 (function () {
