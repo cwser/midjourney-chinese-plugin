@@ -31,7 +31,8 @@
 ### ✅ 推荐油猴脚本（Tampermonkey）
 
 1. 安装浏览器插件 [Tampermonkey](https://www.tampermonkey.net/)；
-2. 打开脚本安装地址 [点击安装](https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/MidJourneyCN-tampermonkey.user.js)；
+2. 打开脚本安装地址 [点击安装](https://cdn.jsdelivr.net/gh/cwser/midjourney-chinese-plugin@main/MidJourneyCN-tampermonkey.user.js
+)；
 
 ### 🚀 Chrome 浏览器安装步骤
 
