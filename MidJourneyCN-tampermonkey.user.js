@@ -29,10 +29,62 @@
     let translationEnabled = GM_getValue('translationEnabled', true);
     let dictionaryTimestamp = null;
     let dictionaryStatus = '⏳ 加载中';
+    let translationError = null;
+    let statusIndicator;
+
+    function updateStatusDisplay() {
+        const panelStatusText = document.getElementById('panel-status-text');
+        const panelError = document.getElementById('panel-error');
+        const panelErrorText = document.getElementById('panel-error-text');
+        const panelUpdateTimeText = document.getElementById('panel-update-time-text');
+
+        if (!statusIndicator) return;
+
+        if (translationError) {
+            panelStatusText && (panelStatusText.textContent = '异常');
+            statusIndicator.textContent = '异常';
+            statusIndicator.style.backgroundColor = '#ef4444'; // 红色
+            panelError && panelError.classList.remove('hidden');
+            panelErrorText && (panelErrorText.textContent = translationError);
+        } else if (translationEnabled) {
+            panelStatusText && (panelStatusText.textContent = '开启');
+            statusIndicator.textContent = '正常';
+            statusIndicator.style.backgroundColor = '#a5d6a7'; // 浅绿色
+            panelError && panelError.classList.add('hidden');
+        } else {
+            panelStatusText && (panelStatusText.textContent = '关闭');
+            statusIndicator.textContent = '正常';
+            statusIndicator.style.backgroundColor = '#cfd8dc'; // 浅灰色
+            panelError && panelError.classList.add('hidden');
+        }
+
+        if (dictionaryTimestamp && panelUpdateTimeText) {
+            const now = new Date();
+            const timeDiff = now - new Date(dictionaryTimestamp);
+            if (timeDiff < 60 * 1000) {
+                panelUpdateTimeText.textContent = '1分钟内';
+            } else if (timeDiff < 60 * 60 * 1000) {
+                const minutes = Math.floor(timeDiff / (60 * 1000));
+                panelUpdateTimeText.textContent = `${minutes}分钟前`;
+            } else if (timeDiff < 24 * 60 * 60 * 1000) {
+                const hours = Math.floor(timeDiff / (60 * 60 * 1000));
+                panelUpdateTimeText.textContent = `${hours}小时前`;
+            } else if (timeDiff < 7 * 24 * 60 * 60 * 1000) {
+                const days = Math.floor(timeDiff / (24 * 60 * 60 * 1000));
+                panelUpdateTimeText.textContent = `${days}天前`;
+            } else {
+                panelUpdateTimeText.textContent = '超过一周';
+            }
+        }
+    }
 
     function fetchTranslationDict(lang) {
         return new Promise((resolve, reject) => {
-            if (!LANG_URLS[lang]) return reject(new Error('Language not supported'));
+            if (!LANG_URLS[lang]) {
+                translationError = 'Language not supported';
+                updateStatusDisplay();
+                return reject(new Error(translationError));
+            }
             GM_xmlhttpRequest({
                 method: 'GET',
                 url: LANG_URLS[lang],
@@ -46,18 +98,26 @@
                                 timestamp: Date.now(),
                                 data
                             });
+                            translationError = null;
+                            updateStatusDisplay();
                             resolve(data);
                         } catch (e) {
+                            translationError = `解析错误: ${e.message}`;
                             dictionaryStatus = '❌ 解析错误';
+                            updateStatusDisplay();
                             reject(e);
                         }
                     } else {
+                        translationError = `加载失败: ${response.statusText}`;
                         dictionaryStatus = '❌ 加载失败';
-                        reject(new Error(`Failed: ${response.statusText}`));
+                        updateStatusDisplay();
+                        reject(new Error(translationError));
                     }
                 },
                 onerror: (err) => {
+                    translationError = `网络错误: ${err.message}`;
                     dictionaryStatus = '❌ 网络错误';
+                    updateStatusDisplay();
                     reject(err);
                 }
             });
@@ -75,36 +135,51 @@
     }
 
     function translateText(text, dict) {
-        return dict[text.trim()] || text;
+        try {
+            return dict[text.trim()] || text;
+        } catch (error) {
+            translationError = `翻译文本时出错: ${error.message}`;
+            updateStatusDisplay();
+            return text;
+        }
     }
 
     function translateNode(node, dict) {
         if (node[TRANSLATED_SYMBOL]) return;
-        if (node.nodeType === Node.TEXT_NODE) {
-            node.textContent = translateText(node.textContent, dict);
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-            Array.from(node.attributes).forEach(attr => {
-                attr.value = translateText(attr.value, dict);
-            });
-            Array.from(node.childNodes).forEach(child => translateNode(child, dict));
+        try {
+            if (node.nodeType === Node.TEXT_NODE) {
+                node.textContent = translateText(node.textContent, dict);
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                Array.from(node.attributes).forEach(attr => {
+                    attr.value = translateText(attr.value, dict);
+                });
+                Array.from(node.childNodes).forEach(child => translateNode(child, dict));
+            }
+            node[TRANSLATED_SYMBOL] = true;
+        } catch (error) {
+            translationError = `翻译节点时出错: ${error.message}`;
+            updateStatusDisplay();
         }
-        node[TRANSLATED_SYMBOL] = true;
     }
 
     function initializeTranslation(dict) {
-        const observer = new MutationObserver(mutations => {
-            mutations.forEach(mutation => {
-                Array.from(mutation.addedNodes).forEach(node => translateNode(node, dict));
+        try {
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
+                    Array.from(mutation.addedNodes).forEach(node => translateNode(node, dict));
+                });
             });
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
-        translateNode(document.body, dict);
+            observer.observe(document.body, { childList: true, subtree: true });
+            translateNode(document.body, dict);
+        } catch (error) {
+            translationError = `初始化翻译时出错: ${error.message}`;
+            updateStatusDisplay();
+        }
     }
 
     function createControlPanel() {
         const panel = document.createElement('div');
         panel.id = 'translation-control-panel';
-        // 小控制面板靠右下角
         panel.classList.add('fixed', 'bottom-2', 'right-2', 'z-50', 'transition-opacity', 'duration-500');
         panel.innerHTML = `
             <div id="mini-status-panel" class="bg-white rounded-lg shadow-md p-2 text-sm cursor-pointer w-16 h-16 flex flex-col justify-center items-center space-y-1 transform transition-transform duration-300">
@@ -123,6 +198,10 @@
                             <span class="font-medium">更新时间：</span>
                             <span id="panel-update-time-text"></span>
                         </div>
+                        <div id="panel-error" class="flex items-center space-x-2 text-red-500 hidden">
+                            <span class="font-medium">翻译错误：</span>
+                            <span id="panel-error-text"></span>
+                        </div>
                     </div>
                     <button id="toggle-translation" class="w-full py-2 px-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors duration-300">${translationEnabled ? ' 关闭翻译' : ' 开启翻译'}</button>
                     <button id="reload-dictionary" class="w-full py-2 px-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors duration-300"> 重新加载词典</button>
@@ -140,42 +219,9 @@
 
         const body = panel.querySelector('#panel-body');
         const mini = panel.querySelector('#mini-status-panel');
+        statusIndicator = document.getElementById('status-indicator');
 
-        // 更新状态显示函数
-        function updateStatusDisplay() {
-            const statusIndicator = document.getElementById('status-indicator');
-            const panelStatusText = document.getElementById('panel-status-text');
-            if (translationEnabled) {
-                panelStatusText.textContent = '开启';
-                statusIndicator.textContent = '正常';
-                statusIndicator.style.backgroundColor = '#a5d6a7'; // 浅绿色
-            } else {
-                panelStatusText.textContent = '关闭';
-                statusIndicator.textContent = '正常';
-                statusIndicator.style.backgroundColor = '#cfd8dc'; // 浅灰色
-            }
-            // 模拟更新时间判断逻辑
-            const now = new Date();
-            const timeDiff = now - new Date(dictionaryTimestamp);
-            const panelUpdateTimeText = document.getElementById('panel-update-time-text');
-            if (timeDiff < 60 * 1000) {
-                panelUpdateTimeText.textContent = '1分钟内';
-            } else if (timeDiff < 60 * 60 * 1000) {
-                const minutes = Math.floor(timeDiff / (60 * 1000));
-                panelUpdateTimeText.textContent = `${minutes}分钟前`;
-            } else if (timeDiff < 24 * 60 * 60 * 1000) {
-                const hours = Math.floor(timeDiff / (60 * 60 * 1000));
-                panelUpdateTimeText.textContent = `${hours}小时前`;
-            } else if (timeDiff < 7 * 24 * 60 * 60 * 1000) {
-                const days = Math.floor(timeDiff / (24 * 60 * 60 * 1000));
-                panelUpdateTimeText.textContent = `${days}天前`;
-            } else {
-                panelUpdateTimeText.textContent = '超过一周';
-            }
-        }
-
-        // 点击展开收起
-        mini.addEventListener('click', (e) => {
+        mini.addEventListener('click', () => {
             if (body.classList.contains('max-h-0')) {
                 body.style.maxHeight = body.scrollHeight + 'px';
                 body.classList.remove('max-h-0', 'opacity-0');
@@ -198,17 +244,18 @@
         });
 
         panel.querySelector('#reload-dictionary').addEventListener('click', () => {
+            translationError = null;
             GM_setValue(`${currentLang}_cache`, null);
             location.reload();
         });
 
         panel.querySelector('#language-selector').addEventListener('change', (e) => {
+            translationError = null;
             currentLang = e.target.value;
             GM_setValue('language', currentLang);
             location.reload();
         });
 
-        // 自动隐藏逻辑
         let hideTimer = null;
         let transparencyTimer = null;
         function resetAutoHideTimer() {
@@ -223,9 +270,8 @@
                     mini.classList.remove('hidden');
                 }
             }, 6000);
-            // 缩短半透明时间，从 15000ms 调整为 5000ms
             transparencyTimer = setTimeout(() => {
-                if (mini.classList.contains('hidden') === false) {
+                if (!mini.classList.contains('hidden')) {
                     panel.classList.remove('opacity-100');
                     panel.classList.add('opacity-20');
                 }
@@ -239,7 +285,6 @@
         });
         panel.addEventListener('mouseleave', () => resetAutoHideTimer());
 
-        // 点击面板外收起面板
         document.addEventListener('click', (e) => {
             if (!panel.contains(e.target)) {
                 if (!body.classList.contains('max-h-0')) {
