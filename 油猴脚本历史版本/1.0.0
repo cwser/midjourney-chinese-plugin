@@ -7,8 +7,8 @@
 // @match        https://www.midjourney.com/*
 // @grant        none
 // @run-at       document-end
-// @updateURL    https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/MidJourneyCN-tampermonkey.user.js
-// @downloadURL  https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/MidJourneyCN-tampermonkey.user.js
+// @updateURL    https://cdn.jsdelivr.net/gh/cwser/midjourney-chinese-plugin@main/MidJourneyCN-tampermonkey.user.js
+// @downloadURL  https://cdn.jsdelivr.net/gh/cwser/midjourney-chinese-plugin@main/MidJourneyCN-tampermonkey.user.js
 // ==/UserScript==
 
 (function () {
@@ -33,9 +33,9 @@
       return;
     }
 
-    const resHans = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/lang/zh-CN.json');
+    const resHans = await fetch('https://cdn.jsdelivr.net/gh/cwser/midjourney-chinese-plugin@main/lang/zh-CN.json');
     dictHans = await resHans.json();
-    const resHant = await fetch('https://raw.githubusercontent.com/cwser/midjourney-chinese-plugin/main/lang/zh-TW.json');
+    const resHant = await fetch('https://cdn.jsdelivr.net/gh/cwser/midjourney-chinese-plugin@main/lang/zh-TW.json');
     dictHant = await resHant.json();
 
     localStorage.setItem(cacheKey, JSON.stringify({
