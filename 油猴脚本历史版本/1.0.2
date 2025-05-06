@@ -2,7 +2,7 @@
 // @name         MidjourneyCN
 // @namespace    http://tampermonkey.net/
 // @version      1.0.2
-// @description  Midjourney 中文翻译 + 现代浮动控制面板（自适应、拖动、自动收起）
+// @description  Midjourney 中文翻译 + 浮动控制面板（增强动态翻译）
 // @author       G哥
 // @match        https://www.midjourney.com/*
 // @grant        GM_xmlhttpRequest
@@ -23,7 +23,7 @@
         'zh-TW': 'https://cdn.jsdelivr.net/gh/cwser/midjourney-chinese-plugin@main/lang/zh-TW.json'
     };
     const CACHE_EXPIRY = 6 * 60 * 60 * 1000;
-    const TRANSLATED_SYMBOL = Symbol('translated');
+    const TRANSLATED_ATTR = 'data-translated';
 
     let currentLang = GM_getValue('language', 'zh-CN');
     let translationEnabled = GM_getValue('translationEnabled', true);
@@ -31,52 +31,6 @@
     let dictionaryStatus = '⏳ 加载中';
     let translationError = null;
     let statusIndicator;
-
-    function updateStatusDisplay() {
-        const panelStatusText = document.getElementById('panel-status-text');
-        const panelError = document.getElementById('panel-error');
-        const panelErrorText = document.getElementById('panel-error-text');
-        const panelUpdateTimeText = document.getElementById('panel-update-time-text');
-
-        if (!statusIndicator) return;
-
-        if (translationError) {
-            panelStatusText && (panelStatusText.textContent = '异常');
-            statusIndicator.textContent = '异常';
-            statusIndicator.style.backgroundColor = '#ef4444'; // 红色
-            panelError && panelError.classList.remove('hidden');
-            panelErrorText && (panelErrorText.textContent = translationError);
-        } else if (translationEnabled) {
-            panelStatusText && (panelStatusText.textContent = '开启');
-            statusIndicator.textContent = '正常';
-            statusIndicator.style.backgroundColor = '#a5d6a7'; // 浅绿色
-            panelError && panelError.classList.add('hidden');
-        } else {
-            panelStatusText && (panelStatusText.textContent = '关闭');
-            statusIndicator.textContent = '正常';
-            statusIndicator.style.backgroundColor = '#cfd8dc'; // 浅灰色
-            panelError && panelError.classList.add('hidden');
-        }
-
-        if (dictionaryTimestamp && panelUpdateTimeText) {
-            const now = new Date();
-            const timeDiff = now - new Date(dictionaryTimestamp);
-            if (timeDiff < 60 * 1000) {
-                panelUpdateTimeText.textContent = '1分钟内';
-            } else if (timeDiff < 60 * 60 * 1000) {
-                const minutes = Math.floor(timeDiff / (60 * 1000));
-                panelUpdateTimeText.textContent = `${minutes}分钟前`;
-            } else if (timeDiff < 24 * 60 * 60 * 1000) {
-                const hours = Math.floor(timeDiff / (60 * 60 * 1000));
-                panelUpdateTimeText.textContent = `${hours}小时前`;
-            } else if (timeDiff < 7 * 24 * 60 * 60 * 1000) {
-                const days = Math.floor(timeDiff / (24 * 60 * 60 * 1000));
-                panelUpdateTimeText.textContent = `${days}天前`;
-            } else {
-                panelUpdateTimeText.textContent = '超过一周';
-            }
-        }
-    }
 
     function fetchTranslationDict(lang) {
         return new Promise((resolve, reject) => {
@@ -136,7 +90,8 @@
 
     function translateText(text, dict) {
         try {
-            return dict[text.trim()] || text;
+            const clean = text.trim();
+            return dict[clean] || text;
         } catch (error) {
             translationError = `翻译文本时出错: ${error.message}`;
             updateStatusDisplay();
@@ -145,17 +100,22 @@
     }
 
     function translateNode(node, dict) {
-        if (node[TRANSLATED_SYMBOL]) return;
         try {
             if (node.nodeType === Node.TEXT_NODE) {
-                node.textContent = translateText(node.textContent, dict);
+                const original = node.textContent.trim();
+                if (!original) return;
+
+                const translated = dict[original];
+                if (translated && node.parentNode?.getAttribute(TRANSLATED_ATTR) !== original) {
+                    node.textContent = translated;
+                    node.parentNode?.setAttribute(TRANSLATED_ATTR, original);
+                }
             } else if (node.nodeType === Node.ELEMENT_NODE) {
-                Array.from(node.attributes).forEach(attr => {
-                    attr.value = translateText(attr.value, dict);
-                });
+                if (node.getAttribute(TRANSLATED_ATTR) === '__translated__') return;
+
                 Array.from(node.childNodes).forEach(child => translateNode(child, dict));
+                node.setAttribute(TRANSLATED_ATTR, '__translated__');
             }
-            node[TRANSLATED_SYMBOL] = true;
         } catch (error) {
             translationError = `翻译节点时出错: ${error.message}`;
             updateStatusDisplay();
@@ -166,14 +126,63 @@
         try {
             const observer = new MutationObserver(mutations => {
                 mutations.forEach(mutation => {
-                    Array.from(mutation.addedNodes).forEach(node => translateNode(node, dict));
+                    if (mutation.type === 'childList') {
+                        mutation.addedNodes.forEach(node => translateNode(node, dict));
+                    } else if (mutation.type === 'characterData' || mutation.type === 'attributes') {
+                        translateNode(mutation.target, dict);
+                    }
                 });
             });
-            observer.observe(document.body, { childList: true, subtree: true });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true,
+                characterData: true,
+                attributes: true
+            });
+
             translateNode(document.body, dict);
         } catch (error) {
             translationError = `初始化翻译时出错: ${error.message}`;
             updateStatusDisplay();
+        }
+    }
+
+    function updateStatusDisplay() {
+        if (!statusIndicator) return;
+        const panelStatusText = document.getElementById('panel-status-text');
+        const panelError = document.getElementById('panel-error');
+        const panelErrorText = document.getElementById('panel-error-text');
+        const panelUpdateTimeText = document.getElementById('panel-update-time-text');
+
+        if (translationError) {
+            panelStatusText.textContent = '异常';
+            statusIndicator.textContent = '异常';
+            statusIndicator.style.backgroundColor = '#ef4444';
+            panelError.classList.remove('hidden');
+            panelErrorText.textContent = translationError;
+        } else if (translationEnabled) {
+            panelStatusText.textContent = '开启';
+            statusIndicator.textContent = '正常';
+            statusIndicator.style.backgroundColor = '#a5d6a7';
+            panelError.classList.add('hidden');
+        } else {
+            panelStatusText.textContent = '关闭';
+            statusIndicator.textContent = '正常';
+            statusIndicator.style.backgroundColor = '#cfd8dc';
+            panelError.classList.add('hidden');
+        }
+
+        const now = new Date();
+        const diff = now - new Date(dictionaryTimestamp);
+        if (diff < 60 * 1000) {
+            panelUpdateTimeText.textContent = '1分钟内';
+        } else if (diff < 3600 * 1000) {
+            panelUpdateTimeText.textContent = `${Math.floor(diff / 60000)}分钟前`;
+        } else if (diff < 86400 * 1000) {
+            panelUpdateTimeText.textContent = `${Math.floor(diff / 3600000)}小时前`;
+        } else {
+            panelUpdateTimeText.textContent = `${Math.floor(diff / 86400000)}天前`;
         }
     }
 
@@ -244,13 +253,11 @@
         });
 
         panel.querySelector('#reload-dictionary').addEventListener('click', () => {
-            translationError = null;
             GM_setValue(`${currentLang}_cache`, null);
             location.reload();
         });
 
         panel.querySelector('#language-selector').addEventListener('change', (e) => {
-            translationError = null;
             currentLang = e.target.value;
             GM_setValue('language', currentLang);
             location.reload();
@@ -271,7 +278,7 @@
                 }
             }, 6000);
             transparencyTimer = setTimeout(() => {
-                if (!mini.classList.contains('hidden')) {
+                if (!body.classList.contains('opacity-100')) {
                     panel.classList.remove('opacity-100');
                     panel.classList.add('opacity-20');
                 }
