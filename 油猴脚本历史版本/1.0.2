@@ -1,12 +1,16 @@
 // ==UserScript==
-// @name         MidJourneyCN
+// @name         MidjourneyCN
 // @namespace    http://tampermonkey.net/
 // @version      1.0.2
-// @description  将 MidJourney 网站英文界面翻译为中文，稳定增强版（支持简繁切换、缓存、自动更新、动态监听增强）
+// @description  Midjourney 中文翻译 + 现代浮动控制面板（自适应、拖动、自动收起）
 // @author       G哥
 // @match        https://www.midjourney.com/*
-// @grant        none
-// @run-at       document-end
+// @grant        GM_xmlhttpRequest
+// @grant        GM_addStyle
+// @grant        GM_setValue
+// @grant        GM_getValue
+// @grant        GM_registerMenuCommand
+// @connect      cdn.jsdelivr.net
 // @updateURL    https://cdn.jsdelivr.net/gh/cwser/midjourney-chinese-plugin@main/MidJourneyCN-tampermonkey.user.js
 // @downloadURL  https://cdn.jsdelivr.net/gh/cwser/midjourney-chinese-plugin@main/MidJourneyCN-tampermonkey.user.js
 // ==/UserScript==
@@ -154,12 +158,19 @@
             const now = new Date();
             const timeDiff = now - new Date(dictionaryTimestamp);
             const panelUpdateTimeText = document.getElementById('panel-update-time-text');
-            if (timeDiff < 60 * 60 * 1000) {
-                panelUpdateTimeText.textContent = '1小时内';
-            } else if (timeDiff < 2 * 60 * 60 * 1000) {
-                panelUpdateTimeText.textContent = '2小时内';
+            if (timeDiff < 60 * 1000) {
+                panelUpdateTimeText.textContent = '1分钟内';
+            } else if (timeDiff < 60 * 60 * 1000) {
+                const minutes = Math.floor(timeDiff / (60 * 1000));
+                panelUpdateTimeText.textContent = `${minutes}分钟前`;
+            } else if (timeDiff < 24 * 60 * 60 * 1000) {
+                const hours = Math.floor(timeDiff / (60 * 60 * 1000));
+                panelUpdateTimeText.textContent = `${hours}小时前`;
+            } else if (timeDiff < 7 * 24 * 60 * 60 * 1000) {
+                const days = Math.floor(timeDiff / (24 * 60 * 60 * 1000));
+                panelUpdateTimeText.textContent = `${days}天前`;
             } else {
-                panelUpdateTimeText.textContent = '未知';
+                panelUpdateTimeText.textContent = '超过一周';
             }
         }
 
