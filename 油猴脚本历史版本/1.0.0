@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         MidJourneyCN
+// @name         MidjourneyCN
 // @namespace    http://tampermonkey.net/
 // @version      1.0.0
 // @description  将 MidJourney 网站英文界面翻译为中文，稳定增强版（支持简繁切换、缓存、自动更新、动态监听增强）
