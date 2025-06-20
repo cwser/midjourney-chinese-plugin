@@ -1,4 +1,8 @@
 {
+    "Help us improve video": "帮助我们改进视频",
+    "I like this video": "我喜欢这个视频",
+    "I don't like this video": "我不喜欢这个视频",
+    "I'm neutral on this video": "我对这个视频持中立态度",
     "Extend this video with the existing prompt": "使用现有提示扩展此视频",
     "Extend Auto": "自动扩展",
     "Extend Manual": "手动扩展",
