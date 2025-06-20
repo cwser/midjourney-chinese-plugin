@@ -1,4 +1,13 @@
 {
+    "Animate Image": "制作图像动画",
+    "Auto": "自动",
+    "Low Motion": "低动态",
+    "High Motion": "高动态",
+    "Manual": "手动",
+    "Create a video starting from this image": "从此图像开始创建视频",
+    "Create a video from this image with a low amount of motion": "从此图像创建低动态视频",
+    "Create a video from this image with a high amount of motion": "从此图像创建高动态视频",
+    "Create a video starting from this image with a prompt describing the motion": "从此图像开始创建视频，并使用提示词描述运动",
     "Open in Editor": "在编辑器中打开",
     "Animate Image": "制作图像动画",
     "Animate": "制作动画",
