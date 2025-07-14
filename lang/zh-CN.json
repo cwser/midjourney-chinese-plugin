@@ -1,4 +1,10 @@
 {
+    "Use a person's likeness, or an object's form": "使用人物的肖像，或物体的形态",
+    "Omni Reference": "全能参考",
+    "Srefs": "风格参考",
+    "Unavailable with image prompts": "不适用于图片提示词",
+    "Orefs": "对象参考",
+    "Frame": "画框"
     "Choose a file": "选择一个文件",
     "to upload": "以上传",
     "Unavailable with Image prompts": "使用图片提示时不可用",
@@ -76,7 +82,7 @@
     "Starting Frame": "起始帧",
     "Drop image to describe": "拖放图像生成提示词",
     "Click or drag to swap": "单击或拖动即可交换",
-    "Omni Strength": "全方位权重",
+    "Omni Strength": "全能参考权重",
     "Superusers": "高级用户",
     "New Folder Group": "新建文件夹组",
     "Run all prompts": "运行所有提示词",
@@ -87,7 +93,7 @@
     "Use as Image Prompt": "作为图像提示词使用",
     "Edit Prompt": "编辑提示词",
     "To Top": "回到顶部",
-    "Omni-Reference": "全方位参考",
+    "Omni-Reference": "全能参考",
     "Use a person's likeness, or the form of an object": "智能调用人物肖像特征与物体形态结构",
     "Character References": "角色参考",
     "Use a character's likeness": "使用角色外貌",
