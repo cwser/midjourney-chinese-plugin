@@ -1,4 +1,8 @@
 {
+    "in Prompt": "在提示中",
+    "Upload images from your computer to add to your moodboard.": "从您的电脑上传图片，以添加到您的情绪板。",
+    "Add images from around the web to your moodboard.": "从网络各处添加图片到您的情绪板。",
+    "Select images from your gallery to add to your moodboard.": "从您的图库中选择图片，以添加到您的情绪板。",
     "Image Reference": "图片提示",
     "Style Reference": "风格参考",
     "Change First Frame": "更改第一帧",
