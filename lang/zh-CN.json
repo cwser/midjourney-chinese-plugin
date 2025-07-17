@@ -31,6 +31,7 @@
     "Editing is done through text prompting and region selecting. It's compatible with model personalization, style references, character references, and image prompts.": "编辑是通过文本提示和区域选择来完成的。它兼容模型个性化、风格参考、角色参考以及图片提示词。",
     "Retexture images": "重塑图像纹理",
     "You can also use our 'image retexturing mode' to keep the shape the same, but modify lighting, surface materials, and texture.": "您也可以使用我们的“图像重塑纹理模式”来保持形状不变，同时修改光照、表面材质和纹理。",
+    "Retexture will change the contents of the input image while trying to preserve the original structure.": "“重塑纹理”功能会改变输入图像的内容，同时尝试保留其原始结构。",
     "in Prompt": "在提示中",
     "Upload images from your computer to add to your moodboard.": "从您的电脑上传图片，以添加到您的情绪板。",
     "Add images from around the web to your moodboard.": "从网络各处添加图片到您的情绪板。",
