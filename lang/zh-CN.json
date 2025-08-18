@@ -1,4 +1,5 @@
 {
+    "Select images below": "选择下方图片",
     "For You": "为你推荐",
     "Resolution": "分辨率",
     "The resolution of the video. Higher resolutions take longer to generate and cost more fast hours.": "视频的分辨率。分辨率越高，生成时间越长，消耗的快速小时数也越多。",
@@ -215,7 +216,7 @@
     "The default speed. Generates at a moderate rate and spends Fast Hours": "默认速度。以中等速率生成图像并消耗快速时长",
     "Generates at a slower, variable rate, but won't spend Fast Hours. Not available on the Basic plan": "以较慢、可变速率生成图像，但不会消耗快速时长。在基础套餐中不可用",
     "The speed at which the images generate.": "图像生成的速度。",
-    "Midjourney routinely releases new model versions to improve efficiency, coherency, and quality. The latest model is the default, but each model excels at producing different types of images.": "Midjourney 会定期发布新模型，以提升效率、连贯性和质量。最新模型为默认模型，但每种模型在生成不同类型图像方面各有优势。",
+    "Midjourney routinely releases new model versions to improve efficiency, coherency, 和 quality. The latest model is the default, but each model excels at producing different types of images.": "Midjourney 会定期发布新模型，以提升效率、连贯性和质量。最新模型为默认模型，但每种模型在生成不同类型图像方面各有优势。",
     "Raw mode replaces the default aesthetic of some Midjourney Model Versions. Using it can help you create more photo-realistic images, cinematic scenes, or cuter characters.": "原始模式会替代某些 Midjourney 模型版本的默认美学风格。启用它可以帮助你生成更真实的图像、电影画面，或更可爱的角色。",
     "Influences how varied the images are. High values will produce more unusual and unexpected results and compositions. Lower values have more reliable, repeatable results": "影响图像的多样性。较高的数值将带来更不寻常和不可预测的结果与构图；较低数值更具可控性与可重复性。",
     "Introduces quirky qualities to your generated images, resulting in unique and unexpected outcomes": "为生成的图像引入独特特质，从而带来独特且出人意料的结果",
